@@ -1,6 +1,6 @@
 import './App.css';
 import CoursesListPage from './pages/CoursesListPage'
-import RegisterPage from './pages/RegisterPage';
+import RegisterPage from './pages/register/RegisterPage';
 import Header from './components/Header';
 import Login from './components/Login';
 function App() {
