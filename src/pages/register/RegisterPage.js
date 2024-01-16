@@ -92,20 +92,6 @@ const RegisterPage = () => {
 
           <form onSubmit={handleRegister}>
             <h1>Create Account</h1>
-            <div className="social-icons">
-              <a href="#">
-                <i className="fa-brands fa-google"></i>
-              </a>
-              <a href="#">
-                <i className="fa-brands fa-facebook-f"></i>
-              </a>
-              <a href="#">
-                <i className="fa-brands fa-linkedin-in"></i>
-              </a>
-              <a href="#">
-                <i className="fa-brands fa-github"></i>
-              </a>
-            </div>
             <span>or use E-mail for signing up</span>
             <input type="text" placeholder="Name" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="email" placeholder="E-mail" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -114,7 +100,7 @@ const RegisterPage = () => {
               <option value="student">Student</option>
               <option value="lector">Lecturer</option>
             </select>
-            <a href="#" id="sign-in-media">Already have an account? Sign in</a>
+            <a href="/" id="sign-in-media">Already have an account? Sign in</a>
             <button type="submit">Sign up</button>
           </form>
         </div>
@@ -122,25 +108,11 @@ const RegisterPage = () => {
 
           <form action="">
             <h1>Log in</h1>
-            <div className="social-icons">
-              <a href="#">
-                <i className="fa-brands fa-google"></i>
-              </a>
-              <a href="#">
-                <i className="fa-brands fa-facebook-f"></i>
-              </a>
-              <a href="#">
-                <i className="fa-brands fa-linkedin-in"></i>
-              </a>
-              <a href="#">
-                <i className="fa-brands fa-github"></i>
-              </a>
-            </div>
             <span>or use E-mail for signing in</span>
             <input placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <a href="#">Forgot your password?</a>
-            <a href="#" id="sign-up-media">Don't have an account? Sign up.</a>
+            <a href="/">Forgot your password?</a>
+            <a href="/" id="sign-up-media">Don't have an account? Sign up.</a>
             <button type="submit" onClick={handleLogin} >Log in</button>
           </form>
         </div>
