@@ -1,0 +1,36 @@
+header {
+    box-sizing: border-box;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 15px;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+  }
+  .loginbtn{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    transition: all ease .6s;
+    border-radius: 6px;
+  }
+  .loginbtn:hover{
+    background-color: #512da8;
+    color: #fff;
+  }
+  .logo {
+    font-weight: 600;
+    font-size: 25px;
+    padding: 15px;
+  }
+  
+  .nav{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+  }
+  

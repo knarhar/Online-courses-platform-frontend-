@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../statics/css/courses.css';
 
 function CoursesListPage() {
   const [courses, setCourses] = useState([]);
