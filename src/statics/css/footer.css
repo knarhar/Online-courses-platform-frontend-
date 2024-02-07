@@ -1,0 +1,13 @@
+footer {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer .nav {
+    gap: 12px;
+    font-size: 14px;
+}
+footer .logo {
+    font-size: 18px;
+}
