@@ -1,0 +1,16 @@
+.main-articles {
+    margin-top: 100px;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    gap:  55px;
+}
+.main-articles h1 {
+    font-size: 120px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 100px;
+}
+.main-articles p{
+    width: 85%;
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import logo from '../statics/images/logo.png';
 import { Link } from 'react-router-dom';
 import '../statics/css/homepage.css';
+import CoursesCarousel from '../components/CoursesCarousel';
 const HomePage = () => {
   return (
     <div>
@@ -17,6 +18,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <CoursesCarousel/>
     </div>
   )
 }

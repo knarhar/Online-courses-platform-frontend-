@@ -80,6 +80,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('access_token', accessToken);
         setIsAuthenticated(true);
         setUserData(data.user);
+        fetchUserData();
         navigate('/home');
         console.log('Login successful!');
       } else {

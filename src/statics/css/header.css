@@ -20,6 +20,8 @@ header {
 .header-profile img {
   width: 30px;
   border-radius: 550px;
+  border: 1px solid black;
+
 }
 
 .prof {
