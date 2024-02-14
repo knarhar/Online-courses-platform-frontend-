@@ -1,6 +1,7 @@
 .main-courses-cont {
 
-  background-image: url('../images/courses-bg.jpg');
+  /* background-image: url('../images/courses-bg.jpg'); */
+
   padding: 55px 35px;
 }
 
@@ -10,9 +11,9 @@
   justify-content: center;
   align-items: center;
   backface-visibility: hidden;
-  background-color: #8b8b8b77;
+  /* background-color: #8b8b8b77; */
   padding: 15px 35px;
-  color: white;
+  /* color: white; */
   border-radius: 25px;
 
 }
@@ -83,7 +84,7 @@
   align-items: center;
   gap: 25px;
   position: relative;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(254, 254, 254);
   user-select: none;
 }
 
