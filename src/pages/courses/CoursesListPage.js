@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../statics/css/courses.css';
-
+import sorry from '../../statics/images/sorry-bg.jpg'
 function CategoryFilter({ onCategoryChange, selectedCategory }) {
   const categories = [
 
@@ -65,23 +65,31 @@ function CoursesListPage() {
       </div>
       <CategoryFilter onCategoryChange={categoryId => setSelectedCategory(categoryId)} selectedCategory={selectedCategory} />
       <div className='courses-list'>
-        {loading && <p>Loading courses...</p>}
-        {error && <p>{error}</p>}
-        {!loading && !error && courses.map((course, index) => (
-          <div key={index} className='course-card'>
-            <div>
-              <img src={course.pic} alt={`Course ${course.title}`} />
-              <h3>{course.title}</h3>
-            </div>
-            <div className='course-card-text'>
-              <p>{course.description}</p>
-              <p className='price'>{course.is_paid ? 'Paid' : 'Free'}</p>
-              <div className='category-flag'>{course.category_name}</div>
-              <Link to={`/courses/${course.id}`} className='course-card-action'>Read more...</Link>
-            </div>
-          </div>
-        ))}
+  {loading && <p>Loading courses...</p>}
+  {error && <p>{error}</p>}
+  {!loading && !error && courses.length > 0 ? (
+    courses.map((course, index) => (
+      <div key={index} className='course-card'>
+        <div>
+          <img src={course.pic} alt={`Course ${course.title}`} />
+          <h3>{course.title}</h3>
+        </div>
+        <div className='course-card-text'>
+          <p>{course.description}</p>
+          <p className='price'>{course.is_paid ? 'Paid' : 'Free'}</p>
+          <div className='category-flag'>{course.category_name}</div>
+          <Link to={`/courses/${course.id}`} className='course-card-action'>Read more...</Link>
+        </div>
       </div>
+    ))
+  ) : (
+    <div className='no-courses'>
+      <img src={sorry} alt="Sorry" />
+      <p>No courses available for the selected category.</p>
+    </div>
+  )}
+</div>
+
     </div>
   );
 }

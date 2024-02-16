@@ -4,13 +4,27 @@
     display: flex;
     justify-content: space-around;
     align-items: end;
-    gap:  55px;
+    gap: 55px;
 }
+
 .main-articles h1 {
     font-size: 120px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     line-height: 100px;
 }
-.main-articles p{
+
+.main-articles p {
     width: 85%;
+}
+
+.no-articles {
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    font-size: 25px;
+}
+
+.no-articles img {
+    width: 400px;
 }

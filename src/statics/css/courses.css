@@ -190,7 +190,16 @@
 .course-container ul {
   text-align: left;
 }
-
+.no-courses{
+  padding: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  font-size: 25px;
+}
+.no-courses img{
+  width: 400px;
+}
 .course-info {
   text-align: center;
   width: 600px;
@@ -204,6 +213,8 @@
   background-color: #5c3cbd;
   border-radius: 5px;
   transition: .8s ease;
+  border: none;
+  cursor: pointer;
 }
 .course-info-action:hover{
   background-color: #42366c;

@@ -10,6 +10,7 @@ import AboutUsPage from './pages/about us/AboutUsPage';
 import CoursesListPage from './pages/courses/CoursesListPage';
 import CourseDetailPage from './pages/courses/CourseDetailPage';
 import ArticlesPage from './pages/articles/ArticlesPage';
+import EditProfilePage from './pages/profile/EditProfilePage';
 function App() {
   return (
     <Router>
@@ -23,8 +24,10 @@ function App() {
           <Route path="/courses/:id" element={<CourseDetailPage/>} />
           <Route path='/home' element={<HomePage/>}/>
           <Route path='/profile' element={<ProfilePage/>}/>
+          <Route path='/profile/update' element={<EditProfilePage/>}/>
           <Route path='/about' element={<AboutUsPage/>}/>
           <Route path='/articles' element={<ArticlesPage/>}/>
+
         </Routes>
 
         <Footer/>
