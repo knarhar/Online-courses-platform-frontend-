@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
 import logo from '../statics/images/logo.png';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import '../statics/css/homepage.css';
 import CoursesCarousel from '../components/CoursesCarousel';
+import { useAuth } from '../assets/AuthContext';
+
 const HomePage = () => {
+  const { isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    console.log('isAuthenticated:', isAuthenticated);
+  }, [isAuthenticated]);
   return (
     <div>
       <div className='main-container'>
@@ -14,13 +22,16 @@ const HomePage = () => {
           </div>
           <div className='main-logo'>
             <img src={logo} alt='logo' />
-            <Link to='/register' className='main-action'>Log in to start</Link>
+            {isAuthenticated ?(
+              <Link to='/courses' className='main-action'>Explore our courses</Link>) :(
+                <Link to='/register' className='main-action'>Log in to start</Link>)
+            }
           </div>
         </div>
       </div>
-      <CoursesCarousel/>
+      <CoursesCarousel />
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

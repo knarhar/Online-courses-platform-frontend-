@@ -78,10 +78,10 @@ const ArticlesPage = () => {
         onCategoryChange={categoryId => setSelectedCategory(categoryId)}
         selectedCategory={selectedCategory}
       />
-      <div>
+      <div className='articles-list'>
         {articles.length > 0 ? (
           articles.map(article => (
-            <div key={article.id}>
+            <div key={article.id} className='article-card'>
               <h2>{article.title}</h2>
               <p>{article.description}</p>
             </div>

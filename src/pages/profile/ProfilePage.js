@@ -20,8 +20,8 @@ const ProfilePage = () => {
             <h1>Profile Page</h1>
             {isAuthenticated ? (
                 userData ? (
-                    <div>
-                        <div className='main-profile'>
+                    <div >
+                        <div className='main-profile '>
                             <img src={userData.pic} alt='profile pic' />
                             <p><i className="fa-regular fa-user"></i> Username: {userData.username}</p>
                         </div>
@@ -36,7 +36,7 @@ const ProfilePage = () => {
                 <p>You are not authenticated. Please log in.</p>
             )}
             </div>
-            <div className='my-courses'>
+            <div className='my-courses-cont'>
                 <MyCourses/>
             </div>
         </div>

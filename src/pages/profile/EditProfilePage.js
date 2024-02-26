@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../assets/AuthContext";
 import '../../statics/css/profile.css';
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const EditProfilePage = () => {
   const { fetchUserData, userData, isAuthenticated } = useAuth();
@@ -34,6 +34,7 @@ const EditProfilePage = () => {
     }
 
     if (!username && !email && !pic && !bank) {
+      navigate('/profile');
       return;
     }
 
@@ -91,7 +92,8 @@ const EditProfilePage = () => {
 
   return (
     <div className="update-prof-cont">
-      <div className="main-profile">
+      <div className="main-upd-profile">
+        <Link to='/profile' className="main-upd-back"><i class="fa-solid fa-arrow-left"></i> back to the profile</Link>
         <h1>Update Profile</h1>
       </div>
       {loading && <p>Loading profile data...</p>}
@@ -101,7 +103,8 @@ const EditProfilePage = () => {
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="change-profile">
             <label htmlFor="pic" className="change-pic-label">
-              {userData && userData.pic && <img src={userData.pic} alt='profile pic' className="upd-prof-pic" />}
+              {userData && userData.pic && <img src={pic ? URL.createObjectURL(pic) : userData.pic} alt='profile pic' className="upd-prof-pic" />}
+              
               <i className="fa-solid fa-camera"></i>
             </label>
             <input type="file" id='pic' onChange={changePic} className="change-pic" />

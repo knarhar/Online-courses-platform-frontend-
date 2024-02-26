@@ -11,6 +11,9 @@ import CoursesListPage from './pages/courses/CoursesListPage';
 import CourseDetailPage from './pages/courses/CourseDetailPage';
 import ArticlesPage from './pages/articles/ArticlesPage';
 import EditProfilePage from './pages/profile/EditProfilePage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import EnrolledCoursePage from './pages/courses/EnrolledCoursePage';
+import LecturePage from './pages/courses/LecturePage';
 function App() {
   return (
     <Router>
@@ -24,10 +27,14 @@ function App() {
           <Route path="/courses/:id" element={<CourseDetailPage/>} />
           <Route path='/home' element={<HomePage/>}/>
           <Route path='/profile' element={<ProfilePage/>}/>
+          <Route path='/profile/courses/:id' element={<EnrolledCoursePage/>}/>
           <Route path='/profile/update' element={<EditProfilePage/>}/>
+          {/* <Route path='/profile/courses/:id/lectures/:id' element={<LecturePage/>}/> */}
+          <Route path='/profile/courses/:id/lectures/:lectureId' element={<LecturePage/>}/>
+
           <Route path='/about' element={<AboutUsPage/>}/>
           <Route path='/articles' element={<ArticlesPage/>}/>
-
+          <Route path='/policy' element={<PrivacyPolicy/>}/>
         </Routes>
 
         <Footer/>
