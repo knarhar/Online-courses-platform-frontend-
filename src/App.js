@@ -14,6 +14,7 @@ import EditProfilePage from './pages/profile/EditProfilePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import EnrolledCoursePage from './pages/courses/EnrolledCoursePage';
 import LecturePage from './pages/courses/LecturePage';
+import ModulePage from './pages/courses/ModulePage';
 function App() {
   return (
     <Router>
@@ -29,8 +30,8 @@ function App() {
           <Route path='/profile' element={<ProfilePage/>}/>
           <Route path='/profile/courses/:id' element={<EnrolledCoursePage/>}/>
           <Route path='/profile/update' element={<EditProfilePage/>}/>
-          {/* <Route path='/profile/courses/:id/lectures/:id' element={<LecturePage/>}/> */}
-          <Route path='/profile/courses/:id/lectures/:lectureId' element={<LecturePage/>}/>
+          <Route path='/profile/courses/:id/topics/:topicId/lectures/:lectureId' element={<LecturePage/>}/>
+          <Route path='/profile/courses/:id/topics/:topicId/modules/:moduleId' element={<ModulePage/>}/>
 
           <Route path='/about' element={<AboutUsPage/>}/>
           <Route path='/articles' element={<ArticlesPage/>}/>

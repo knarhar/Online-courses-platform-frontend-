@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../assets/AuthContext';
+import '../../statics/css/lecturepage.css';
 
 const LecturePage = () => {
-  const { id, lectureId } = useParams();
+  const { id, topicId, lectureId } = useParams();
   const { client } = useAuth();
   const [lectureData, setLectureData] = useState(null);
+  const [courseLectures, setCourseLectures] = useState([]);
 
   useEffect(() => {
     const fetchLectureData = async () => {
@@ -31,16 +33,80 @@ const LecturePage = () => {
     fetchLectureData();
   }, [client, id, lectureId]);
 
+  useEffect(() => {
+    const fetchCourseLectures = async () => {
+      try {
+        const lecturesResponse = await fetch(`http://127.0.0.1:8000/api/courses/${id}/topics/${topicId}/lectures/`);
+        if (!lecturesResponse.ok) {
+          throw new Error(`Failed to fetch course lectures: ${lecturesResponse.statusText}`);
+        }
+        const lecturesData = await lecturesResponse.json();
+        setCourseLectures(lecturesData);
+      } catch (error) {
+        console.error('Error fetching course lectures:', error);
+      }
+    };
+
+    fetchCourseLectures();
+  }, [id]);
+
+  const getNextLectureId = () => {
+    const currentIndex = courseLectures.findIndex(lecture => lecture.id === parseInt(lectureId));
+    if (currentIndex !== -1 && currentIndex < courseLectures.length - 1) {
+      return courseLectures[currentIndex + 1].id;
+    }
+    return null;
+  };
+
+  const getPreviousLectureId = () => {
+    const currentIndex = courseLectures.findIndex(lecture => lecture.id === parseInt(lectureId));
+    if (currentIndex > 0) {
+      return courseLectures[currentIndex - 1].id;
+    }
+    return null;
+  };
+
   return (
     <div className='lecture-container'>
-      <h2>Lecture Content</h2>
       {lectureData && (
         <div>
-          <h3>{lectureData.title}</h3>
-          <p>{lectureData.content}</p>
-          {/* Добавьте дополнительную информацию о лекции, используя lectureData */}
+          <h2>{lectureData.title}</h2>
+          <p>{lectureData.content.split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              <br />
+            </span>
+          ))}</p>
+
+          <div>
+            <iframe
+              width="100%"
+              height="500px"
+              src={lectureData.link}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       )}
+      
+      <div className='lect-nav'>
+        {/* Link to previous lecture */}
+        {getPreviousLectureId() && (
+          <Link to={`/profile/courses/${id}/topics/${topicId}/lectures/${getPreviousLectureId()}`}>
+            Previous lecture
+          </Link>
+        )}
+        
+        {/* Link to next lecture */}
+        {getNextLectureId() && (
+          <Link to={`/profile/courses/${id}/topics/${topicId}/lectures/${getNextLectureId()}`}>
+            Next lecture
+          </Link>
+        )}
+      </div>
     </div>
   );
 };

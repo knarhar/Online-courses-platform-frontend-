@@ -1,0 +1,46 @@
+.about-us-main-container{
+
+}
+.about-us-text{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:150px;
+    top: 150px;
+    padding: 50px;
+}
+.about-us-text h1 {
+    font-size: 120px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 100px;
+}
+.slogan-container {
+    display: inline-block;
+    padding: 15px ;
+}
+.slogan{
+    font-family: monospace;
+    font-size: 30px;
+    text-align: center;
+    border-right: 2px solid black;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: 
+        typing 2s steps(29),
+        cursor .4s step-end infinite alternate;
+}
+
+@keyframes cursor {
+    50%{
+        border-color: transparent;
+    }
+    
+}
+@keyframes typing {
+    from{
+        width: 0;
+    }
+    
+}

@@ -1,0 +1,36 @@
+.module-container{
+    margin-top: 100px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.question-container {
+    width: 80%;
+    margin: auto;
+    
+
+}
+
+.question-container h4{
+    border-bottom: 1px solid #656565;
+}
+
+.answer {
+    padding: 5px;
+    border: 1px solid #654aa6;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.answer:hover{
+    transform: scale(1.001) translate(-1px);
+}
+.correct {
+    background-color: aquamarine;
+}
+.incorrect {
+    background-color: #e26464;
+}

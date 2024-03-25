@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import '../statics/css/homepage.css';
 import CoursesCarousel from '../components/CoursesCarousel';
 import { useAuth } from '../assets/AuthContext';
+import Learn from '../components/Learn';
 
 const HomePage = () => {
   const { isAuthenticated } = useAuth();
@@ -30,6 +31,7 @@ const HomePage = () => {
         </div>
       </div>
       <CoursesCarousel />
+      <Learn/>
     </div>
   );
 }

@@ -71,13 +71,15 @@ const EnrolledCoursePage = () => {
                   <ul>
                     {topic.lectures.map((lecture) => (
                       <li key={lecture.id}>
-                        <Link to={`/profile/courses/${id}/lectures/${lecture.id}`}>
+                        <Link to={`/profile/courses/${id}/topics/${topic.id}/lectures/${lecture.id}`}>
                           {lecture.title}
                         </Link>
                       </li>
                     ))}
                     {topic.modules.map((module) => (
-                      <li key={module.id}>{module.title}</li>
+                      <li key={module.id}>
+                        <Link to={`/profile/courses/${id}/topics/${topic.id}/modules/${module.id}`}>{module.title}</Link>
+                      </li>
                     ))}
                   </ul>
                 </div>

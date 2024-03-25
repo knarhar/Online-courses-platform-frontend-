@@ -1,6 +1,7 @@
 .main-container{
+    height: 650px;
     margin-top: 35px;
-    padding: 50px;
+    padding: 100px 50px;
     background-image: url('../images/main-bg.jpg');
     background-size:cover;
     background-repeat: no-repeat;
@@ -15,7 +16,7 @@
 }
 .main{
     padding: 25px;
-    background-color: rgba(12, 12, 12, 0.527);
+    background-color: rgba(12, 12, 12, 0.736);
     display: flex;
     justify-content: space-around;
     align-items: center;
