@@ -7,7 +7,8 @@ function CategoryFilter({ onCategoryChange, selectedCategory }) {
     { id: 1, name: 'Programming' },
     { id: 2, name: 'Design' },
     { id: 3, name: 'Economics' },
-    { id: 4, name: 'Mathematics' }
+    { id: 4, name: 'Mathematics' },
+    { id: 5, name: 'Other' }
   ];
 
   return (

@@ -73,3 +73,14 @@
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
 }
+
+.avil {
+    font-size: 35px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 200;
+    padding: 0 25px;
+}
+
+.avil i {
+    color: #ffe600;
+}

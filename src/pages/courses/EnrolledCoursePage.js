@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useAuth } from "../../assets/AuthContext";
 import '../../statics/css/enrolledcourse.css'
+import CourseProgress from "./CourseProgress";
 
 const EnrolledCoursePage = () => {
   const { id } = useParams();
@@ -87,7 +88,7 @@ const EnrolledCoursePage = () => {
             ))}
           </div>
 
-
+          <CourseProgress courseId={id}/>
 
           {/* Отобразите прогресс пользователя, если есть
           {userProgress && (

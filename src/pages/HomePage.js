@@ -23,15 +23,17 @@ const HomePage = () => {
           </div>
           <div className='main-logo'>
             <img src={logo} alt='logo' />
-            {isAuthenticated ?(
-              <Link to='/courses' className='main-action'>Explore our courses</Link>) :(
-                <Link to='/register' className='main-action'>Log in to start</Link>)
+            {isAuthenticated ? (
+              <Link to='/courses' className='main-action'>Explore our courses</Link>) : (
+              <Link to='/register' className='main-action'>Log in to start</Link>)
             }
           </div>
         </div>
       </div>
+      <h1 className='avil'> <i className="fa-solid fa-star"></i> Available courses</h1>
+
       <CoursesCarousel />
-      <Learn/>
+      <Learn />
     </div>
   );
 }

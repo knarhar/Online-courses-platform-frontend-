@@ -1,5 +1,5 @@
 .about-us-main-container{
-
+    user-select: none;
 }
 .about-us-text{
     position: absolute;

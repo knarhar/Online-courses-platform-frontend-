@@ -22,16 +22,26 @@ const CoursesCarousel = () => {
     }, []);
 
     return (
-        <Carousel>
-            {courses.map(course => (
-                <div key={course.id}>
+        <div className='carousel-cont'>
+            <div className='courses-carousel'>
+                {courses.map((course) => (
                     <Link to={`/courses/${course.id}`}>
                         <img src={course.pic} alt={course.title} />
-                        <p className="legend">{course.title}</p>
                     </Link>
-                </div>
-            ))}
-        </Carousel>
+
+                ))}
+
+            </div>
+            <div className='courses-carousel'>
+                {courses.map((course) => (
+                    <Link to={`/courses/${course.id}`}>
+                        <img src={course.pic} alt={course.title} />
+                    </Link>
+
+                ))}
+
+            </div>
+        </div>
     );
 };
 
