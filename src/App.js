@@ -15,30 +15,31 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import EnrolledCoursePage from './pages/courses/EnrolledCoursePage';
 import LecturePage from './pages/courses/LecturePage';
 import ModulePage from './pages/courses/ModulePage';
+
 function App() {
   return (
     <Router>
       <div className="App">
         <AuthProvider>
-        <Header/>
-        <Routes>
-          <Route path='/' element={<HomePage />}/>
-          <Route path="/register" element={<RegisterPage/>} />
-          <Route path="/courses" element={<CoursesListPage/>} />
-          <Route path="/courses/:id" element={<CourseDetailPage/>} />
-          <Route path='/home' element={<HomePage/>}/>
-          <Route path='/profile' element={<ProfilePage/>}/>
-          <Route path='/profile/courses/:id' element={<EnrolledCoursePage/>}/>
-          <Route path='/profile/update' element={<EditProfilePage/>}/>
-          <Route path='/profile/courses/:id/topics/:topicId/lectures/:lectureId' element={<LecturePage/>}/>
-          <Route path='/profile/courses/:id/topics/:topicId/modules/:moduleId' element={<ModulePage/>}/>
+            <Header />
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/courses" element={<CoursesListPage />} />
+              <Route path="/courses/:id" element={<CourseDetailPage />} />
+              <Route path='/home' element={<HomePage />} />
+              <Route path='/profile' element={<ProfilePage />} />
+              <Route path='/profile/courses/:id' element={<EnrolledCoursePage />} />
+              <Route path='/profile/update' element={<EditProfilePage />} />
+              <Route path='/profile/courses/:id/topics/:topicId/lectures/:lectureId' element={<LecturePage />} />
+              <Route path='/profile/courses/:id/topics/:topicId/modules/:moduleId' element={<ModulePage />} />
 
-          <Route path='/about' element={<AboutUsPage/>}/>
-          <Route path='/articles' element={<ArticlesPage/>}/>
-          <Route path='/policy' element={<PrivacyPolicy/>}/>
-        </Routes>
+              <Route path='/about' element={<AboutUsPage />} />
+              <Route path='/articles' element={<ArticlesPage />} />
+              <Route path='/policy' element={<PrivacyPolicy />} />
+            </Routes>
 
-        <Footer/>
+            <Footer />
         </AuthProvider>
       </div>
     </Router>

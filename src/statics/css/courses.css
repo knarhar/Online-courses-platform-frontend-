@@ -86,12 +86,14 @@
   position: relative;
   background-color: rgb(254, 254, 254);
   user-select: none;
+  border: 1px solid #42366c;
 }
-
+/* 
 .course-card:before {
   content: '';
   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   position: absolute;
+  border: 1px solid #42366c;
   border-radius: 16px;
   top: -2px;
   left: -2px;
@@ -102,7 +104,7 @@
   opacity: .5;
   transition: opacity .3s ease-in-out;
   z-index: -1;
-}
+} */
 
 .course-card h3 {
   text-align: center;
@@ -141,27 +143,69 @@
   color: #982FBC;
 }
 
-.price {
+.paid-price {
+  display: flex;
+  align-items: center;
   position: absolute;
   bottom: 0;
-  right: 25px;
-  color: #FFB800;
+  right: 0px;
+  color: #7c2b1d;
+  font-weight: 700;
+  background-color: #ff8000;
+  padding: 0 15px 0 0;
+  .triangle {
+		width: 0;
+		height: 0;
+		border-left: 15px solid white;	
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;
+	}
+}
+.free-price{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  color: #1d7c43;
+  font-weight: 700;
+  background-color: #96ffa8;
+  padding: 0 15px 0 0;
+  .triangle {
+		width: 0;
+		height: 0;
+		border-left: 15px solid white;	
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;
+	}
 }
 
 .category-flag {
-  background: linear-gradient(90deg, rgba(254, 148, 250, 1) 0%, rgba(112, 223, 255, 1) 50%, rgba(0, 65, 255, 1) 100%);
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(56,106,132,1) 0%, rgb(192, 192, 192) 57%, rgba(56,106,132,1) 100%);
   color: #fff;
-  padding: 8px 14px;
-  border-radius: 15px 0 0 5px;
+  padding: 0px 14px 0 0 ;
   margin-top: 10px;
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 13px;
+  font-size: 18px;
+  font-style: bold;
+  background-size: 200%;
+  
+  animation: glowing 15s linear infinite;
+  .triangle {
+		width: 0;
+		height: 0;
+		border-left: 15px solid white;	
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;
+    margin-right: 8px;
+	}
 }
 
 .category-flag:hover {
-  background-size: 200%;
 
 }
 

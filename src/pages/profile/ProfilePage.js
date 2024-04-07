@@ -25,8 +25,8 @@ const ProfilePage = () => {
                             <img src={userData.pic} alt='profile pic' />
                             <p><i className="fa-regular fa-user"></i> Username: {userData.username}</p>
                         </div>
-                        <p><i class="fa-regular fa-envelope"></i> Email: {userData.email}</p>
-                        <p><i class="fa-solid fa-money-check-dollar"></i> Bank Account: {userData.bank_account}</p>
+                        <p><i className="fa-regular fa-envelope"></i> Email: {userData.email}</p>
+                        <p><i className="fa-solid fa-money-check-dollar"></i> Bank Account: {userData.bank_account}</p>
                         <Link to='/profile/update' className='update'>Update Profile</Link>
                     </div>
                 ) : (

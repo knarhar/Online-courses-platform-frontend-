@@ -25,7 +25,7 @@ const CoursesCarousel = () => {
         <div className='carousel-cont'>
             <div className='courses-carousel'>
                 {courses.map((course) => (
-                    <Link to={`/courses/${course.id}`}>
+                    <Link to={`/courses/${course.id}`} key={course.id}>
                         <img src={course.pic} alt={course.title} />
                     </Link>
 
@@ -34,7 +34,7 @@ const CoursesCarousel = () => {
             </div>
             <div className='courses-carousel'>
                 {courses.map((course) => (
-                    <Link to={`/courses/${course.id}`}>
+                    <Link to={`/courses/${course.id}`} key={course.id}>
                         <img src={course.pic} alt={course.title} />
                     </Link>
 

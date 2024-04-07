@@ -76,8 +76,8 @@ function CoursesListPage() {
         </div>
         <div className='course-card-text'>
           <p>{course.description}</p>
-          <p className='price'>{course.is_paid ? 'Paid' : 'Free'}</p>
-          <div className='category-flag'>{course.category_name}</div>
+          {course.is_paid ? <p className='paid-price'><div className='triangle'></div>Paid</p> : <p className='free-price'><div className='triangle'></div>Free</p>}
+          <div className='category-flag'><div className='triangle'></div>{course.category_name[0]}</div>
           <Link to={`/courses/${course.id}`} className='course-card-action'>Read more...</Link>
         </div>
       </div>

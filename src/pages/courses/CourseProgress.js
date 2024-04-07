@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ProgressBar } from 'react-bootstrap';
 
 const CourseProgress = ({ courseId }) => {
   const [progress, setProgress] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCourseProgress = async () => {
@@ -14,34 +14,49 @@ const CourseProgress = ({ courseId }) => {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         });
-        setProgress(response.data);
-        setLoading(false);
+        if (response.data) {
+          setProgress(response.data);
+        } else {
+          setError("No progress data found.");
+        }
       } catch (error) {
-        console.error('Error fetching course progress:', error);
+        console.error("Error fetching course progress:", error);
+        setError("An error occurred while fetching progress data.");
       }
     };
-
     fetchCourseProgress();
   }, [courseId]);
 
-  if (loading) {
+  if (!progress) {
     return <p>Loading progress...</p>;
   }
 
-  if (!progress) {
-    return <p>No progress available for this course.</p>;
-  }
+  const { completed_modules, completed_lectures, total_modules, total_lectures } = progress;
 
-  const { completedModules, completedLectures, totalModules, totalLectures } = progress;
+  const moduleProgress = (completed_modules.length / total_modules) * 100;
+  const lectureProgress = (completed_lectures.length / total_lectures) * 100;
 
-  // Display progress using ProgressBar from react-bootstrap
   return (
     <div>
       <h2>Course Progress</h2>
-      <ProgressBar variant="success" now={(completedModules / totalModules) * 100} />
-      <p>Completed Modules: {completedModules} / {totalModules}</p>
-      <ProgressBar variant="info" now={(completedLectures / totalLectures) * 100} />
-      <p>Completed Lectures: {completedLectures} / {totalLectures}</p>
+
+
+      <div>
+        <p>Module Progress</p>
+        
+        {moduleProgress === 100 ? (<p>You completed all modules!</p>) :
+        <ProgressBar now={moduleProgress} label={`${moduleProgress.toFixed(2)}%`} />
+
+        }
+      </div>
+      <div>
+        <p>Lecture Progress</p>
+        {lectureProgress === 100 ? (<p>You completed all lectures!</p>) :
+          <ProgressBar now={lectureProgress} label={`${lectureProgress.toFixed(2)}%`} />
+        }
+
+      </div>
+      {error && <p className="text-danger">{error}</p>}
     </div>
   );
 };

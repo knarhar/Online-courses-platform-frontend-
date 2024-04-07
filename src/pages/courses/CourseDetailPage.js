@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../assets/AuthContext';
 
+
+
 const CourseDetailPage = () => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
@@ -10,14 +12,18 @@ const CourseDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [enrollmentMessage, setEnrollmentMessage] = useState('');
   const [enrollmentStatus, setEnrollmentStatus] = useState(false);
-  const [showPaymentForm, setShowPaymentForm] = useState(false); // Initially hide form
+  const [showPaymentForm, setShowPaymentForm] = useState(false); 
   const [bankAccount, setBankAccount] = useState('');
   const [coursePrice, setCoursePrice] = useState('');
+
+  
+  
 
   const handleEnroll = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://127.0.0.1:8000/api/enrollment/${id}/`, {
+  
+      await fetch(`http://127.0.0.1:8000/api/enrollment/${id}/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,13 +31,23 @@ const CourseDetailPage = () => {
         },
         body: JSON.stringify({ bankAccount, coursePrice }),
       });
-      const data = await response.json();
+  
+      await fetch(`http://127.0.0.1:8000/api/user-progress/${userData.id}/courses/${id}/initialize`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+        },
+        body: JSON.stringify({ lectureId: id }),
+      });
+  
       setLoading(false);
       setEnrollmentStatus(true);
     } catch (error) {
       console.error('Error enrolling:', error);
     }
   };
+  
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -60,7 +76,6 @@ const CourseDetailPage = () => {
   }
 
   const toggleApplyForm = () => {
-    // Toggle showPaymentForm state on Apply button click
     setShowPaymentForm(!showPaymentForm);
   };
 

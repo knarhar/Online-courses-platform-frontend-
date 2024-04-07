@@ -93,7 +93,7 @@ const EditProfilePage = () => {
   return (
     <div className="update-prof-cont">
       <div className="main-upd-profile">
-        <Link to='/profile' className="main-upd-back"><i class="fa-solid fa-arrow-left"></i> back to the profile</Link>
+        <Link to='/profile' className="main-upd-back"><i className="fa-solid fa-arrow-left"></i> back to the profile</Link>
         <h1>Update Profile</h1>
       </div>
       {loading && <p>Loading profile data...</p>}

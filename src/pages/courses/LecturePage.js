@@ -2,12 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../assets/AuthContext';
 import '../../statics/css/lecturepage.css';
+import markLectureCompleted from '../../assets/markLectureCompleted';
 
 const LecturePage = () => {
   const { id, topicId, lectureId } = useParams();
   const { client } = useAuth();
   const [lectureData, setLectureData] = useState(null);
   const [courseLectures, setCourseLectures] = useState([]);
+  const { isAuthenticated, userData, fetchUserData, logout } = useAuth();
+
+  useEffect(() => {
+    const updateProgress = async () => {
+      try {
+        markLectureCompleted(userData.id, id, topicId, lectureId);
+        console.log('User progress updated successfully');
+      } catch (error) {
+        console.error('Error updating user progress:', error);
+      }
+    };
+  
+    updateProgress();
+  }, [lectureId]);
+
 
   useEffect(() => {
     const fetchLectureData = async () => {
@@ -49,6 +65,8 @@ const LecturePage = () => {
 
     fetchCourseLectures();
   }, [id]);
+  
+  
 
   const getNextLectureId = () => {
     const currentIndex = courseLectures.findIndex(lecture => lecture.id === parseInt(lectureId));
@@ -91,6 +109,9 @@ const LecturePage = () => {
           </div>
         </div>
       )}
+
+
+      
       
       <div className='lect-nav'>
         {/* Link to previous lecture */}

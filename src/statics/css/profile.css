@@ -55,6 +55,18 @@
     padding: 35px 0;
     border-bottom: 1px solid rgb(180, 180, 180);
 }
+.course-info-action-delete{
+    background-color: #d4d4d5;
+    padding: 11px;
+    border-radius: 5px;
+    border: none;
+    margin: 0 15px;
+    transition: .4s ease;
+    font-size: 15px;
+}
+.course-info-action-delete:hover{
+    background-color: #898989;
+}
 .no-courses {
     text-align: center;
 }
@@ -62,6 +74,7 @@
     color:#5c3cbd;
     transition: .6s ease;
 }
+
 .no-courses-action:hover {
     color: #42366c;
 }

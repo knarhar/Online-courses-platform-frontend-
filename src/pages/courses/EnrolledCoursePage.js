@@ -28,14 +28,6 @@ const EnrolledCoursePage = () => {
         setCourseData(courseData);
         console.log(courseData);
 
-        // Загрузка прогресса пользователя для этого курса
-        // const userProgressResponse = await client.get(`/api/user-progress/${courseId}/`, {
-        //   headers: {
-        //     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        //   },
-        // });
-        // const userProgressData = userProgressResponse.data;
-        // setUserProgress(userProgressData);
       } catch (error) {
         console.error("Error fetching course data:", error);
       }
@@ -90,14 +82,6 @@ const EnrolledCoursePage = () => {
 
           <CourseProgress courseId={id}/>
 
-          {/* Отобразите прогресс пользователя, если есть
-          {userProgress && (
-            <div>
-              <h2>Your Progress</h2>
-              <p>Completed Modules: {userProgress.completedModules}</p>
-              <p>Total Modules: {courseData.program.length}</p>
-            </div>
-          )} */}
         </div>
       )}
     </div>
