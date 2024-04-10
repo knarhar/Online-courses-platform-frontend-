@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../assets/AuthContext";
 import "../../statics/css/modulepage.css";
+import markModuleCompleted from "../../assets/markModuleCompleted";
 
 const ModulePage = () => {
-  const { id, moduleId } = useParams();
-  const { client } = useAuth();
+  const { id, topicId, moduleId } = useParams();
+  const { client, userData } = useAuth();
   const [moduleData, setModuleData] = useState(null);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
   const [score, setScore] = useState(0);
+  const [allQuestionsAnswered, setAllQuestionsAnswered] = useState(false);
 
   useEffect(() => {
     const fetchModuleData = async () => {
@@ -25,20 +27,46 @@ const ModulePage = () => {
 
         if (!moduleResponse.ok) {
           throw new Error(
-            `Failed to fetch lecture data: ${moduleResponse.statusText}`
+            `Failed to fetch module data: ${moduleResponse.statusText}`
           );
         }
 
         const moduleData = await moduleResponse.json();
         setModuleData(moduleData);
-        console.log(moduleData);
       } catch (error) {
-        console.error("Error fetching lecture data:", error);
+        console.error("Error fetching module data:", error);
       }
     };
 
     fetchModuleData();
   }, [client, id, moduleId]);
+
+  useEffect(() => {
+    if (allQuestionsAnswered) {
+      const result = (score / moduleData.question.length) * 100;
+      console.log(result);
+      markModuleCompleted(userData.id, id, topicId, moduleId, result).then(
+        () => console.log("Module completed successfully"),
+        (error) => console.error("Error marking module as completed:", error)
+      );
+    }
+  }, [allQuestionsAnswered]);
+
+  const handleAnswerSelect = (questionId, answerId, isCorrect) => {
+    if (!selectedAnswers[questionId]) {
+      const updatedSelectedAnswers = { ...selectedAnswers };
+      updatedSelectedAnswers[questionId] = answerId;
+      setSelectedAnswers(updatedSelectedAnswers);
+      if (isCorrect) {
+        setScore(score + 1);
+      }
+      const allQuestionsAnswered =
+        Object.keys(updatedSelectedAnswers).length ===
+        moduleData.question.length;
+
+      setAllQuestionsAnswered(allQuestionsAnswered);
+    }
+  };
 
   return (
     <div>
@@ -47,31 +75,41 @@ const ModulePage = () => {
           <h2>Module: {moduleData.title}</h2>
           <p>Score: {score}</p>
           {moduleData.question.map((question, index) => {
+            const isAnswered = selectedAnswers[question.id] !== undefined;
             const isCorrect = question.answer.find(
-              (answer) => answer.id === selectedAnswer && answer.is_correct
+              (answer) =>
+                answer.id === selectedAnswers[question.id] && answer.is_correct
             );
+            const questionClass = isAnswered ? "read-only" : "";
 
             return (
-              <div key={question.id} className="question-container">
-                <h4>Question {index + 1}: {question.question}</h4>
+              <div
+                key={question.id}
+                className={`question-container ${questionClass}`}
+              >
+                <h4>
+                  Question {index + 1}: {question.question}
+                </h4>
                 {question.answer.map((answer) => {
-                  const answerClass =
-                    selectedAnswer === answer.id
+                  const answerClass = isAnswered
+                    ? answer.id === selectedAnswers[question.id]
                       ? isCorrect
                         ? "answer correct"
                         : "answer incorrect"
-                      : "answer";
+                      : "answer"
+                    : "answer";
 
                   return (
                     <p
                       className={answerClass}
                       key={answer.id}
-                      onClick={() => {
-                        setSelectedAnswer(answer.id);
-                        if (isCorrect) {
-                          setScore(score + 1);
-                        }
-                      }}
+                      onClick={() =>
+                        handleAnswerSelect(
+                          question.id,
+                          answer.id,
+                          answer.is_correct
+                        )
+                      }
                     >
                       {answer.answer}
                     </p>
@@ -80,6 +118,14 @@ const ModulePage = () => {
               </div>
             );
           })}
+          {allQuestionsAnswered && (
+            <div className="result-container">
+              <div className="result">
+                <h3>Quiz Completed!</h3>
+                <p>Your score: {(score / moduleData.question.length) * 100}%</p>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

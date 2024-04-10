@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ProgressBar } from 'react-bootstrap';
+import ProgressBar from 'react-bootstrap/ProgressBar'; // Correct import statement
+import '../../statics/css/courseprogress.css'
+
 
 const CourseProgress = ({ courseId }) => {
   const [progress, setProgress] = useState(null);
@@ -37,25 +39,48 @@ const CourseProgress = ({ courseId }) => {
   const lectureProgress = (completed_lectures.length / total_lectures) * 100;
 
   return (
-    <div>
+    <div className='course-progress-container'>
       <h2>Course Progress</h2>
 
-
-      <div>
+      <div className='module-progress'>
         <p>Module Progress</p>
-        
-        {moduleProgress === 100 ? (<p>You completed all modules!</p>) :
-        <ProgressBar now={moduleProgress} label={`${moduleProgress.toFixed(2)}%`} />
+        {moduleProgress === 100 ? (
+          <>
+            <div className='completed'>
+              <div className='progress-bar-container'>
+                <div className='progress-bar' style={{ width: `${moduleProgress}%` }}>{moduleProgress}%</div>
+
+              </div>
+              <p>You completed all modules!</p>
+            </div>
+          </>
+
+        ) :
+          <div className='progress-bar' style={{ width: `${moduleProgress}%` }}>{moduleProgress}%</div>
 
         }
       </div>
-      <div>
+
+      <div className='lecture-progress'>
         <p>Lecture Progress</p>
-        {lectureProgress === 100 ? (<p>You completed all lectures!</p>) :
-          <ProgressBar now={lectureProgress} label={`${lectureProgress.toFixed(2)}%`} />
-        }
+        {lectureProgress === 100 ? (
+          <>
+          <div className='completed'>
+            <div className='progress-bar-container'>
+              <div className='progress-bar' style={{ width: `${lectureProgress}%` }}>{lectureProgress}%</div>
 
+            </div>
+            <p>You completed all lectures!</p>
+          </div>
+        </>
+        ) : <>
+          <div className='progress-bar-container'>
+            <div className='progress-bar' style={{ width: `${lectureProgress}%` }} > {lectureProgress}%</div>
+          </div>
+        </>
+        }
       </div>
+
       {error && <p className="text-danger">{error}</p>}
     </div>
   );

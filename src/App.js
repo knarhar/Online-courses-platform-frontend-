@@ -16,6 +16,7 @@ import EnrolledCoursePage from './pages/courses/EnrolledCoursePage';
 import LecturePage from './pages/courses/LecturePage';
 import ModulePage from './pages/courses/ModulePage';
 
+
 function App() {
   return (
     <Router>

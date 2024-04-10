@@ -25,19 +25,47 @@ const CoursesCarousel = () => {
         <div className='carousel-cont'>
             <div className='courses-carousel'>
                 {courses.map((course) => (
-                    <Link to={`/courses/${course.id}`} key={course.id}>
-                        <img src={course.pic} alt={course.title} />
-                    </Link>
+                    <div className='carousel-item'>
 
+                        <div className='carousel-wrapper'>
+
+                            <Link to={`/courses/${course.id}`} key={course.id}>
+                                <img src={course.pic} alt={course.title} />
+                            </Link>
+
+                            <div className='course-content'>
+                                <h2>{course.title}</h2>
+                                <Link to={`/courses/${course.id}`} className='carousel-link' key={course.id}>
+                                    Read more
+                                </Link>
+                            </div>
+
+                        </div>
+
+                    </div>
                 ))}
 
             </div>
             <div className='courses-carousel'>
                 {courses.map((course) => (
-                    <Link to={`/courses/${course.id}`} key={course.id}>
-                        <img src={course.pic} alt={course.title} />
-                    </Link>
+                    <div className='carousel-item'>
 
+                        <div className='carousel-wrapper'>
+
+                            <Link to={`/courses/${course.id}`} key={course.id}>
+                                <img src={course.pic} alt={course.title} />
+                            </Link>
+
+                            <div className='course-content'>
+                                <h2>{course.title}</h2>
+                                <Link to={`/courses/${course.id}`} className='carousel-link' key={course.id}>
+                                    Read more
+                                </Link>
+                            </div>
+
+                        </div>
+
+                    </div>
                 ))}
 
             </div>

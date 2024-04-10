@@ -4,6 +4,7 @@
     overflow: hidden;
     padding: 6px 0 0;
     white-space: nowrap;
+    display: flex;
 
 }
 @keyframes slide {
@@ -20,12 +21,68 @@
     animation-play-state: paused;
 }
 .courses-carousel{
-    display: inline-block;
     animation: slide 35s infinite linear;
 }
 .courses-carousel img {
     height: 350px;
     object-fit: cover;
     margin: 0 4px;
+    position: relative;
+}
 
+.carousel-item{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-wrapper{
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.course-content{
+    color: white;
+    position: absolute;
+    z-index: 1222;
+    background-color: rgba(24, 24, 24, 0.753);
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .4s ease;
+}
+.course-content h2 {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+.course-content:hover{
+    opacity: 1;
+}
+
+.course-content > * {
+    transform: translateY(25px);
+    transition: transform .3s;
+}
+.course-content:hover > * {
+    transform: translateY(0px);
+}
+.carousel-link{
+    padding: 15px ;
+    background-color: white;    
+    border-radius: 4px;
+    font-weight: bold;
+    transition: .4s ease;
+}
+.carousel-link:hover{
+    background-color: #5c3cbd;
+    color: white;
+    opacity: .9;
 }

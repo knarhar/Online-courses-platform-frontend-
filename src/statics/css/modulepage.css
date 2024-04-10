@@ -29,8 +29,20 @@
     transform: scale(1.001) translate(-1px);
 }
 .correct {
-    background-color: aquamarine;
+    background-color: rgb(33, 217, 73);
 }
 .incorrect {
-    background-color: #e26464;
+    background-color: #ff9e9e;
+}
+.read-only {
+    pointer-events: none; /* Запретить клики */
+    opacity: 0.5; /* Уменьшить прозрачность */
+  }
+.result-container{
+    text-align: center;
+    border: 2px dashed #7b5aff;
+    padding: 0 50px;
+    margin: 50px 0;
+    font-size: 18px;
+    color: #4a3b6e;
 }
