@@ -1,37 +1,58 @@
-.pp-main-container{
+.pp-main-container {
     margin: 100px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px 0 0 0 ;
+    padding: 50px 0 0 0;
     gap: 50px;
 }
 
-.pp-main-title{
+.pp-main-title {
     padding: 15px 0;
     border-bottom: 1px solid #8c8c8c;
     line-height: 5px;
 }
-.pp-main-title h4{
+
+.pp-main-title h4 {
     font-size: 22px;
 }
-.pp-main-title>p{
+
+.pp-main-title>p {
     font-size: 18px;
 }
-.pp-main-desc{
+
+.pp-main-desc {
     padding: 25px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.pp-services{
+
+.pp-services {
     padding: 50px 0;
     display: grid;
     grid-template-columns: repeat(2, 450px);
-    
+
 }
-.service{
+
+.service {
     padding: 0 25px;
+}
+
+@media only screen and (max-width: 800px) {
+    .pp-main-container{
+        padding: 10px;
+    }
+
+    .pp-services {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .pp-main-title>p {
+        font-size: 15px;
+    }
 }

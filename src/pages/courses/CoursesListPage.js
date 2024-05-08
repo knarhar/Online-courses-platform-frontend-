@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../statics/css/courses.css';
 import sorry from '../../statics/images/sorry-bg.jpg'
+
+
 function CategoryFilter({ onCategoryChange, selectedCategory }) {
   const categories = [
-
     { id: null, name: 'All' },
     { id: 1, name: 'Programming' },
     { id: 2, name: 'Design' },
@@ -12,19 +13,38 @@ function CategoryFilter({ onCategoryChange, selectedCategory }) {
     { id: 4, name: 'Mathematics' }
   ];
 
+  const handleChange = (categoryId) => {
+    onCategoryChange(categoryId);
+  };
+
   return (
     <div className='categories'>
-      <h2>Filter by Category:</h2>
+      <h2><i class="fa-solid fa-filter"></i> Filter by Category:</h2>
       <div className='categories-btn'>
         {categories.map(category => (
-          <button key={category.id} onClick={() => onCategoryChange(category.id)}
-            className={selectedCategory === category.id ? 'selected' : ''}>{category.name}
+          <button
+            key={category.id}
+            onClick={() => handleChange(category.id)}
+            className={selectedCategory === category.id ? 'selected' : ''}
+          >
+            {category.name}
           </button>
         ))}
+      </div>
+      <div className='category-options'>
+        <select onChange={(e) => handleChange(Number(e.target.value))} value={selectedCategory || ''}>
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
 }
+
+
 function CoursesListPage() {
   const [courses, setCourses] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -65,30 +85,30 @@ function CoursesListPage() {
       </div>
       <CategoryFilter onCategoryChange={categoryId => setSelectedCategory(categoryId)} selectedCategory={selectedCategory} />
       <div className='courses-list'>
-  {loading && <p>Loading courses...</p>}
-  {error && <p>{error}</p>}
-  {!loading && !error && courses.length > 0 ? (
-    courses.map((course, index) => (
-      <div key={index} className='course-card'>
-        <div>
-          <img src={course.pic} alt={`Course ${course.title}`} />
-          <h3>{course.title}</h3>
-        </div>
-        <div className='course-card-text'>
-          <p>{course.description}</p>
-          {course.is_paid ? <p className='paid-price'><div className='triangle'></div>Paid</p> : <p className='free-price'><div className='triangle'></div>Free</p>}
-          <div className='category-flag'><div className='triangle'></div>{course.category_name[0]}</div>
-          <Link to={`/courses/${course.id}`} className='course-card-action'>Read more...</Link>
-        </div>
+        {loading && <p>Loading courses...</p>}
+        {error && <p>{error}</p>}
+        {!loading && !error && courses.length > 0 ? (
+          courses.map((course, index) => (
+            <div key={index} className='course-card'>
+              <div>
+                <img src={course.pic} alt={`Course ${course.title}`} />
+                <h3>{course.title}</h3>
+              </div>
+              <div className='course-card-text'>
+                <p>{course.description}</p>
+                {course.is_paid ? <p className='paid-price'><div className='triangle'></div>Paid</p> : <p className='free-price'><div className='triangle'></div>Free</p>}
+                <div className='category-flag'><div className='triangle'></div>{course.category_name[0]}</div>
+                <Link to={`/courses/${course.id}`} className='course-card-action'>Read more...</Link>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className='no-courses'>
+            <img src={sorry} alt="Sorry" />
+            <p>No courses available for the selected category.</p>
+          </div>
+        )}
       </div>
-    ))
-  ) : (
-    <div className='no-courses'>
-      <img src={sorry} alt="Sorry" />
-      <p>No courses available for the selected category.</p>
-    </div>
-  )}
-</div>
 
     </div>
   );

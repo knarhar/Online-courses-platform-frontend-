@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../statics/css/articles.css';
 import sad from '../../statics/images/sad-bg2.jpg'
+import { Link } from 'react-router-dom';
 function CategoryFilter({ onCategoryChange, selectedCategory }) {
   const categories = [
     { id: null, name: 'All' },
@@ -11,19 +12,32 @@ function CategoryFilter({ onCategoryChange, selectedCategory }) {
     { id: 5, name: 'Other' }
   ];
 
+  const handleChange = (categoryId) => {
+    onCategoryChange(categoryId);
+  };
+
   return (
     <div className='categories'>
-      <h2>Filter by Category:</h2>
+      <h2><i class="fa-solid fa-filter"></i> Filter by Category:</h2>
       <div className='categories-btn'>
         {categories.map(category => (
           <button
             key={category.id}
-            onClick={() => onCategoryChange(category.id)}
+            onClick={() => handleChange(category.id)}
             className={selectedCategory === category.id ? 'selected' : ''}
           >
             {category.name}
           </button>
         ))}
+      </div>
+      <div className='category-options'>
+        <select onChange={(e) => handleChange(Number(e.target.value))} value={selectedCategory || ''}>
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
@@ -85,6 +99,8 @@ const ArticlesPage = () => {
             <div key={article.id} className='article-card'>
               <h2>{article.title}</h2>
               <p>{article.description}</p>
+                <div className='art-category-flag'><div className='triangle'></div>{article.category_name[0]}</div>
+              <Link to={`/articles/${article.id}`} className='link-to-article'><i class="fa-solid fa-tag"></i> See more</Link>
             </div>
           ))
         ) : (

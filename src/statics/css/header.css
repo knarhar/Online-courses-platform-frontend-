@@ -10,7 +10,10 @@ header {
   z-index: 1000;
   top: 0;
 }
+.navigation {
+  display: none;
 
+}
 .header-profile{
   display: flex;
   gap: 15%;
@@ -62,5 +65,70 @@ header {
 .nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 50px;
+}
+.nav .loginbtn {
+  display: none;
+}
+@media only screen and (max-width: 1200px) {
+  .navigation{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+  .line {
+    width: 22px;
+    border: 1px solid black;
+  }
+  .loginbtn{
+    display: none;
+  }
+  
+  .nav .loginbtn {
+    display: flex;
+    justify-content:left;
+    background-color: transparent;
+    border-radius: 0;
+  }
+  header{
+    justify-content: space-between !important;
+    
+  }
+  .nav{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    width: 200px;
+    right: 0;
+    top: 69px;
+    background: #e9e0fd;
+    height: calc(100vh - 69px);
+    box-sizing: border-box;
+    padding: 10px;
+    transform: translateX(100%);
+    transition: 0.5s ease;
+    gap: 3px;
+    border-radius: 2px 0 0 2px;
+    position: absolute;
+    overflow: hidden;
+
+  }
+  .nav a {
+    padding: 12px;
+    border: 1px #512da8 solid;
+    width: 100%;
+  }
+  .nav.show {
+    transform: translateX(0%);
+
+  }
+  .header-profile{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 50px;
+  }
 }

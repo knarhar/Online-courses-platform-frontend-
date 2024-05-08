@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../assets/AuthContext';
-
+import '../../statics/css/payment.css'
 
 
 const CourseDetailPage = () => {
@@ -12,42 +12,78 @@ const CourseDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [enrollmentMessage, setEnrollmentMessage] = useState('');
   const [enrollmentStatus, setEnrollmentStatus] = useState(false);
-  const [showPaymentForm, setShowPaymentForm] = useState(false); 
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [bankAccount, setBankAccount] = useState('');
   const [coursePrice, setCoursePrice] = useState('');
 
-  
-  
+  if (!showPaymentForm) {
+    document.body.classList.remove('payment-form-open');
+  }
+
+
 
   const handleEnroll = async () => {
-    try {
-      setLoading(true);
-  
-      await fetch(`http://127.0.0.1:8000/api/enrollment/${id}/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-        },
-        body: JSON.stringify({ bankAccount, coursePrice }),
-      });
-  
-      await fetch(`http://127.0.0.1:8000/api/user-progress/${userData.id}/courses/${id}/initialize`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-        },
-        body: JSON.stringify({ lectureId: id }),
-      });
-  
-      setLoading(false);
-      setEnrollmentStatus(true);
-    } catch (error) {
-      console.error('Error enrolling:', error);
+    if (bankAccount !== '0000000000000000' && course.is_paid) {
+
+      try {
+        setLoading(true);
+
+        await fetch(`http://127.0.0.1:8000/api/enrollment/${id}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          },
+          body: JSON.stringify({ bankAccount, coursePrice }),
+        });
+
+        await fetch(`http://127.0.0.1:8000/api/user-progress/${userData.id}/courses/${id}/initialize`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          },
+          body: JSON.stringify({ lectureId: id }),
+        });
+
+        setLoading(false);
+        setEnrollmentStatus(true);
+        setShowPaymentForm(!showPaymentForm);
+      } catch (error) {
+        console.error('Error enrolling:', error);
+      }
+    } else if (!course.is_paid) {
+      try {
+        setLoading(true);
+
+        await fetch(`http://127.0.0.1:8000/api/enrollment/${id}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        });
+
+        await fetch(`http://127.0.0.1:8000/api/user-progress/${userData.id}/courses/${id}/initialize`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          },
+          body: JSON.stringify({ lectureId: id }),
+        });
+
+        setLoading(false);
+        setEnrollmentStatus(true);
+      } catch (error) {
+        console.error('Error enrolling:', error);
+      }
+    }
+    else if (course.is_paid && bankAccount === '0000000000000000') {
+      alert('Please enter your bank account!')
     }
   };
-  
+
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -71,13 +107,32 @@ const CourseDetailPage = () => {
     fetchCourse();
   }, [id, isAuthenticated]);
 
+  useEffect(() => {
+    if (userData) {
+      setBankAccount(userData.bank_account);
+    }
+  }, [userData]);
+  
+  
+  useEffect(() => {
+    if (showPaymentForm) {
+      document.body.classList.add('payment-form-open');
+    } else {
+      document.body.classList.remove('payment-form-open');
+    }
+  }, [showPaymentForm]);
+
+
   if (!course) {
     return <p>Loading...</p>;
   }
 
+
   const toggleApplyForm = () => {
     setShowPaymentForm(!showPaymentForm);
   };
+
+  
 
   const toggleDropdown = (index) => {
     setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -86,6 +141,7 @@ const CourseDetailPage = () => {
   return (
     <div>
       <div className='course-container'>
+      <div className='back-to-courses-container'><div className='triangle'></div><Link to='/courses' className='back-to-courses'><i className="fa-solid fa-arrow-left"></i> Back to courses</Link></div>
         <img src={course.pic} alt={`Course ${course.title}`} />
         <div className='course-info'>
           <h1>{course.title}</h1>
@@ -94,7 +150,7 @@ const CourseDetailPage = () => {
           <p>{course.description}</p>
           {isAuthenticated ? (
             enrollmentStatus ? (
-              <Link to={`/profile/courses/${id}`} className='course-info-action'>
+              <Link to={`/profile/courses/${id}`} className='course-info-action-enrl'>
                 View My Progress
               </Link>
             ) : (
@@ -105,16 +161,25 @@ const CourseDetailPage = () => {
                       Apply
                     </button>
                     {showPaymentForm && (
-                      <div className="payment-form">
-                        <input type="text" placeholder="Enter bank account" value={userData ? userData.bank_account : ''} onChange={(e) => setBankAccount(e.target.value)} />
-                        <input type="text" className='pr' placeholder="Enter course price" value={course.amount+`${course.currency}`} onChange={(e) => setCoursePrice(e.target.value)} disabled unselectable='true'/>
-                        <div className='btns'>
-                          <button onClick={handleEnroll} className='enroll'>
-                            Enroll
-                          </button>
-                          <button onClick={() => setShowPaymentForm(false)} className='cancel'>
-                            Cancel
-                          </button>
+                      <div className='payment-form-container'>
+
+                        <div className="payment-form">
+                          <div className='payment-row'>
+                            <label htmlFor="bk">Bank account:</label>
+                            <input type="text" name="bk" placeholder="Enter bank account" value={bankAccount} onChange={(e) => setBankAccount(e.target.value)} />
+                          </div>
+                          <div className='payment-row'>
+                            <label htmlFor="pr">Course Price:</label>
+                            <input type="text" name="pr" className='pr' placeholder="Enter course price" value={course.amount + `${course.currency}`} onChange={(e) => setCoursePrice(e.target.value)} disabled unselectable='true' />
+                          </div>
+                          <div className='btns'>
+                            <button onClick={handleEnroll} className='enroll'>
+                              Enroll
+                            </button>
+                            <button onClick={() => setShowPaymentForm(false)} className='cancel'>
+                              Cancel
+                            </button>
+                          </div>
                         </div>
                       </div>
                     )}

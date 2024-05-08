@@ -89,3 +89,30 @@
     flex-direction: column;
     gap: 15px;
 }
+
+@media only screen and (max-width: 900px) {
+    .enr-main-cont{
+        padding: 25px;
+    }
+
+    .enr-main-cont img {
+        width: 300px;
+    }
+
+    .enr-main-cont p {
+        width: auto;
+    }
+    .enr-prog{
+        width: 95%;
+    }
+
+    .title-bar{
+        display: flex;
+        gap: 4px;
+    }
+    .title-bar > h1 > a{
+        font-size: 18px;
+        line-height: normal;
+    }
+    
+}

@@ -1,0 +1,84 @@
+/* Добавляем стили для блокировки прокрутки страницы */
+body.payment-form-open {
+    overflow: hidden; /* Запрещаем прокрутку */
+  }
+  
+.payment-form-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color: #55555550;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    gap: 10px;
+    z-index: 123333;
+}
+
+.payment-row{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+.payment-form label{
+    font-size: 13px;
+    text-align: left;
+}
+
+.payment-form input {
+    padding: 5px 10px;
+    font-size: 18px;
+}
+
+.payment-form button {
+    padding: 5px 25px;
+    background-color: #820b0b;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    width: 100%;
+    font-size: 15px;
+}
+
+.payment-form button:hover {
+    background-color: #5c1414;
+}
+
+.payment-form .cancel {
+    background-color: #898989;
+}
+
+.payment-form .btns {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+.payment-form .pr {
+    pointer-events: none;
+}

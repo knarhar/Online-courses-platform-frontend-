@@ -1,11 +1,31 @@
 .module-container{
-    margin-top: 100px !important;
+    margin: 100px 0 80px !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.module-container i {
+    font-size: 19px;
+    background-color: #5c3cbd;
+    padding: 5px 7px;
+    border-radius: 15px;
+    color: white;
+    transition: .4s ease;
+    position: absolute;
+    left: 150px;
+    top: 115px;
+}
+
+.module-container i:hover {
+    background-color: #432c83;
+
+}
+
+.module-container h2 {
+    text-align: center;
+}
 .question-container {
     width: 80%;
     margin: auto;
@@ -45,4 +65,12 @@
     margin: 50px 0;
     font-size: 18px;
     color: #4a3b6e;
+}
+
+
+@media only screen and (max-width:900px) {
+    .module-container i {
+        left: 10px;
+    }
+    
 }

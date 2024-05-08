@@ -15,6 +15,7 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [active, setActive] = useState(false)
+  const [media, setMedia] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -55,11 +56,14 @@ const RegisterPage = () => {
     setActive(!active)
   }
 
+  const handleMedia = () => {
+    setMedia(!media)
+  }
 
   return (
     <div className='main-reg-cont'>
       <div className={active ? "register-container active" : "register-container"} id='container'>
-        <div className='form-container sign-up'>
+        <div className={media ? 'form-container sign-up media-active' : 'form-container sign-up'}>
 
           <form onSubmit={handleRegister}>
             <h1>Create Account</h1>
@@ -67,23 +71,28 @@ const RegisterPage = () => {
             <input type="text" placeholder="Userame" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="email" placeholder="E-mail" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <select name="user type" id="user-type">
+            {/* <select name="user type" id="user-type">
               <option value="student">Student</option>
               <option value="lector">Lecturer</option>
-            </select>
-            <a href="/" id="sign-in-media">Already have an account? Sign in</a>
+            </select> */}
+
+            <div className='agr'>
+              <input type='radio' name='agr' id='agr' placeholder="I agree with Privacy Policy" />
+              <label htmlFor='agr'>I agree with Privacy Policy</label>
+            </div>
+            <a id="sign-in-media" onClick={handleMedia}>Already have an account? Sign in</a>
             <button type="submit">Sign up</button>
           </form>
         </div>
-        <div className='form-container sign-in'>
+        <div className={media ? 'form-container sign-in media-active' : 'form-container sign-in'}>
 
           <form action="">
             <h1>Log in</h1>
-            <span>or use E-mail for signing in</span>
-            <input placeholder="E-mail" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <span>or use Your username for signing in</span>
+            <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <a href="/">Forgot your password?</a>
-            <a href="/" id="sign-up-media">Don't have an account? Sign up.</a>
+            {/* <a href="/">Forgot your password?</a> */}
+            <a id="sign-up-media" onClick={handleMedia}>Don't have an account? Sign up.</a>
             <button type="submit" onClick={(e) => handleLogin(e)} >Log in</button>
           </form>
         </div>

@@ -15,6 +15,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import EnrolledCoursePage from './pages/courses/EnrolledCoursePage';
 import LecturePage from './pages/courses/LecturePage';
 import ModulePage from './pages/courses/ModulePage';
+import ArticleDetailPage from './pages/articles/ArticleDetailPage';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
 
               <Route path='/about' element={<AboutUsPage />} />
               <Route path='/articles' element={<ArticlesPage />} />
+              <Route path='/articles/:id' element={<ArticleDetailPage />} />
               <Route path='/policy' element={<PrivacyPolicy />} />
             </Routes>
 

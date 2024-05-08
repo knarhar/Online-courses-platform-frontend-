@@ -4,7 +4,7 @@ import '../statics/css/footer.css';
 function Footer (){
     return (
         <footer>
-            <div className='nav'>
+            <div className='nava'>
                 <Link to='/articles'>Articles</Link>
                 <Link to='/courses'>Courses</Link>
                 <Link to='/about'>About us</Link>

@@ -88,3 +88,34 @@
 .completed .progress-bar-container {
     opacity: .5;
 }
+
+.total {
+    margin: 50px 0 0 0;
+    padding: 15px;
+    background-color: #dfb4f8;
+    border-radius: 5px;
+    color: #9011d9;
+}
+
+@media only screen and (max-width: 900px) {
+    .lecture-progress{
+        display: flex;
+        flex-direction: column;
+        padding: 15px 0;
+    }
+    .lecture-progress p {
+        width: 100%;
+    }
+    .module-progress{
+        display: flex;
+        flex-direction: column;
+    }
+    .module-progress p {
+        width: 100%;
+    }
+
+    .course-progress-container{
+        width: 97%;
+    }
+    
+}

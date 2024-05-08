@@ -104,3 +104,77 @@
 .media p {
     margin: 0;
 }
+
+@media only screen and (max-width:900px){
+    .about-us{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+    }
+    .about-us img {
+        width: 100%;
+    }
+    .about-us-text{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        top: 100px;
+        box-sizing: border-box;
+        padding: 0;
+        width: 100%;
+    }
+    .about-us-text h1{
+        font-size: 30px;
+        line-height: normal;
+    }
+    .main-about-us-text-p {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+        
+    }
+    .main-about-us-text-p .text{
+        padding: 0 15px;
+    }
+    .slogan-container{
+        padding: 0;
+    }
+    .slogan{
+        font-size: 22px;
+        line-height: normal;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .about-us2 {
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 15px ;
+        margin-top: 50px;
+        gap: 0;
+    }
+
+    .about-us2 img {
+        width: 250px;
+    }
+    .about-us2 p {
+        font-size: 16px;
+        line-height: normal;
+    }
+    .about-us-contact{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 80px;
+    }
+    .foo-logo-cont{
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+}

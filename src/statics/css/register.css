@@ -1,5 +1,4 @@
 
-
 .main-reg-cont {
   margin-top: 1%;
   background-color: #c9d6ff;
@@ -253,10 +252,24 @@ form option {
   display: block;
 }
 
+.agr{
+  display: flex;
+  width: 100%;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.agr input {
+  width: 15px;
+}
+.agr label{
+  font-size: 13px;
+}
+
 @media screen and (max-width: 780px) {
-  .container {
+  .register-container {
     width: 100vw;
-    height: 100vh;
+    
   }
 
   .form-container {

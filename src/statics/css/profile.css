@@ -55,6 +55,11 @@
     padding: 35px 0;
     border-bottom: 1px solid rgb(180, 180, 180);
 }
+.my-no-courses{
+    display: flex;
+    justify-content: space-around;
+    gap: 50px;
+}
 .course-info-action-delete{
     background-color: #d4d4d5;
     padding: 11px;
@@ -67,7 +72,7 @@
 .course-info-action-delete:hover{
     background-color: #898989;
 }
-.no-courses {
+.my-no-courses {
     text-align: center;
 }
 .no-courses-action {
@@ -177,4 +182,52 @@ form button {
 }
 form button:hover {
     background-color: #42366c;
+}
+
+@media only screen and (max-width: 900px) {
+    .my-courses-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .my-courses{
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        box-sizing: border-box;
+        padding: 50px;
+    }
+    .my-courses img {
+        width: 290px;
+    }
+    .my-no-courses img {
+        width: 300px;
+    }
+    .my-no-courses{
+        padding: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0;
+    }
+    .update-prof-cont{
+        margin: 50px 0 90px 0;
+        padding: 50px;
+        gap: 15px;
+    }
+    .main-upd-profile{
+        display: flex;
+    }
+    .main-upd-back{
+        position: absolute;
+        top: 70px;
+        left: 0;
+        gap: 5px;
+    }
+    .change-pic-label i {
+        position: absolute;
+        left: 240px;
+        top: 310px;
+    }
+    
 }

@@ -12,3 +12,64 @@
     display: flex;
     justify-content: space-between;
 }
+
+code{
+    width: 100%;
+    font-size: 15px;
+    border-radius: 2px;
+    color: rgb(250, 248, 235);
+    line-height: normal;
+}
+
+pre {
+    white-space: pre-wrap;
+    padding: 15px;
+    
+    border: 1px solid rgb(70, 70, 70);
+    background-color: #5b5b5b;
+}
+
+.lecture-content li {
+}
+.lecture-container h3 {
+    text-align: center;
+}
+
+.lecture-content{
+    margin-bottom: 25px;
+}
+
+.lecture-content p {
+    margin: 0 !important;
+}
+
+.lecture-content ul {
+    margin: 0;
+}
+
+.lecture-container i {
+    font-size: 19px;
+    background-color: #5c3cbd;
+    padding: 5px 7px;
+    border-radius: 15px;
+    color: white;
+    transition: .4s ease;
+}
+
+.lecture-container i:hover {
+    background-color: #432c83;
+
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+    .lecture-container{
+        padding: 0 12px;
+        width:100%;
+    }
+
+    iframe{
+        height: 350px;
+    }
+}

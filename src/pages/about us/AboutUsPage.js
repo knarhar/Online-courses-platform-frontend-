@@ -11,13 +11,13 @@ const AboutUsPage = () => {
           <img src={about} alt='image' />
           <div className='about-us-text'>
             <h1>About CourseCore</h1>
-            <div>
+            <div className='main-about-us-text-p'>
               <div className='slogan-container' >
 
                 <p className='slogan'>Fueling the world's ambitions</p>
 
               </div>
-              <p>CourseCore is a dynamic and inclusive online learning platform offering a diverse array of courses
+              <p className='text'>CourseCore is a dynamic and inclusive online learning platform offering a diverse array of courses
                 curated from renowned educators across the globe. Born out of an innovative experiment by the National
                 Polytechnic University of Armenia, CourseCore aims to democratize education and retraining, making it
                 accessible to learners worldwide.

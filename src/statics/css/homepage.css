@@ -126,3 +126,65 @@
     width: 600px;
     
 }
+
+@media only screen and (max-width: 1200px) {
+    .main-container {
+        padding: 100px 15px;
+    }
+    .main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-text h1 {
+        font-size: 30px;
+    }
+    .main-text p {
+        font-size: 16px;
+    }
+
+    .main-logo img {
+        width: 150px;
+    }
+
+    .main-action {
+        padding: 5px 9px;
+    }
+    .avil {
+        font-size: 25px;
+        padding: 0;
+        text-align: center;
+    }
+    .learn{
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 25px;
+    }
+    .learn img {
+        width: 350px;
+    }
+    .learn p {
+        font-size: 15px;
+        width: 70%;
+        margin: 0;
+    }
+
+    .learn2{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 25px;
+        margin: 10px 0 0 0;
+    }
+    .learn2 img {
+        width: 300px;
+
+    }
+
+    .learn2 p {
+        font-size: 15px;
+        width: 70%;
+        margin: 0;
+    }
+    
+}

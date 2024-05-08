@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useAuth } from "../../assets/AuthContext";
 import "../../statics/css/modulepage.css";
 import markModuleCompleted from "../../assets/markModuleCompleted";
@@ -72,6 +72,8 @@ const ModulePage = () => {
     <div>
       {moduleData && (
         <div className="module-container">
+          <Link to={`/profile/courses/${id}`} title='Back to course'><i className="fa-solid fa-arrow-left"></i></Link>
+
           <h2>Module: {moduleData.title}</h2>
           <p>Score: {score}</p>
           {moduleData.question.map((question, index) => {

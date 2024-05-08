@@ -4,10 +4,27 @@ footer {
     justify-content: center;
     align-items: center;
 }
-footer .nav {
+footer .nava {
+    display: flex;
     gap: 12px;
     font-size: 14px;
+    text-align: center;
 }
 footer .logo {
     font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+    footer{
+    }
+
+    footer .nava {
+        display: none;
+    }
+
+    footer  .logo {
+        display: flex;
+        font-size: 18px;
+        opacity: 0.6;
+    }
 }

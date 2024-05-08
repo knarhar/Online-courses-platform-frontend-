@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../../assets/AuthContext';
 import '../../statics/css/lecturepage.css';
 import markLectureCompleted from '../../assets/markLectureCompleted';
+import ReactMarkdown from 'react-markdown';
 
 const LecturePage = () => {
   const { id, topicId, lectureId } = useParams();
@@ -20,7 +21,7 @@ const LecturePage = () => {
         console.error('Error updating user progress:', error);
       }
     };
-  
+
     updateProgress();
   }, [lectureId]);
 
@@ -65,8 +66,8 @@ const LecturePage = () => {
 
     fetchCourseLectures();
   }, [id]);
-  
-  
+
+
 
   const getNextLectureId = () => {
     const currentIndex = courseLectures.findIndex(lecture => lecture.id === parseInt(lectureId));
@@ -84,18 +85,23 @@ const LecturePage = () => {
     return null;
   };
 
+  const preStyle = {
+    whiteSpace: 'pre-wrap'
+  };
+
   return (
     <div className='lecture-container'>
+      <Link to={`/profile/courses/${id}`} title='Back to course'><i className="fa-solid fa-arrow-left"></i></Link>
       {lectureData && (
         <div>
-          <h2>{lectureData.title}</h2>
-          <p>{lectureData.content.split('\n').map((line, index) => (
-            <span key={index}>
-              {line}
-              <br />
-            </span>
-          ))}</p>
 
+          <h2>{lectureData.title}</h2>
+
+          {/* <div style={preStyle}>{lectureData.content}</div> */}
+          <div style={preStyle} className='lecture-content'>
+            {/* Рендеринг Markdown с помощью ReactMarkdown */}
+            <ReactMarkdown children={lectureData.content} />
+          </div>
           <div>
             <iframe
               width="100%"
@@ -111,8 +117,8 @@ const LecturePage = () => {
       )}
 
 
-      
-      
+
+
       <div className='lect-nav'>
         {/* Link to previous lecture */}
         {getPreviousLectureId() && (
@@ -120,7 +126,7 @@ const LecturePage = () => {
             Previous lecture
           </Link>
         )}
-        
+
         {/* Link to next lecture */}
         {getNextLectureId() && (
           <Link to={`/profile/courses/${id}/topics/${topicId}/lectures/${getNextLectureId()}`}>

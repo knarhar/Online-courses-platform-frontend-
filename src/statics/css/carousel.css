@@ -1,4 +1,4 @@
-.carousel-cont{
+.carousel-cont {
     background-color: rgb(0, 0, 0);
     width: 100%;
     overflow: hidden;
@@ -7,11 +7,13 @@
     display: flex;
 
 }
+
 @keyframes slide {
-    from{
+    from {
         transform: translateX(0);
     }
-    to{
+
+    to {
         transform: translateX(-100%);
 
     }
@@ -20,30 +22,34 @@
 .carousel-cont:hover .courses-carousel {
     animation-play-state: paused;
 }
-.courses-carousel{
+
+.courses-carousel {
     animation: slide 35s infinite linear;
 }
+
 .courses-carousel img {
     height: 350px;
     object-fit: cover;
     margin: 0 4px;
     position: relative;
+
 }
 
-.carousel-item{
+.carousel-item {
     display: inline-block;
     justify-content: center;
     align-items: center;
 }
 
-.carousel-wrapper{
-    display: flex;    
+.carousel-wrapper {
+    display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+
 }
 
-.course-content{
+.course-content {
     color: white;
     position: absolute;
     z-index: 1222;
@@ -59,30 +65,60 @@
     opacity: 0;
     transition: .4s ease;
 }
+
 .course-content h2 {
     font-size: 55px;
     margin-bottom: 15px;
 }
-.course-content:hover{
+
+.course-content:hover {
     opacity: 1;
 }
 
-.course-content > * {
+.course-content>* {
     transform: translateY(25px);
     transition: transform .3s;
 }
-.course-content:hover > * {
+
+.course-content:hover>* {
     transform: translateY(0px);
 }
-.carousel-link{
-    padding: 15px ;
-    background-color: white;    
+
+.carousel-link {
+    padding: 15px;
+    background-color: white;
     border-radius: 4px;
     font-weight: bold;
     transition: .4s ease;
 }
-.carousel-link:hover{
+
+.carousel-link:hover {
     background-color: #5c3cbd;
     color: white;
     opacity: .9;
+}
+
+@media only screen and (max-width: 600px) {
+    .carousel-cont{
+        padding: 14px;
+    }
+    .courses-carousel {
+        display: flex;
+        align-items: center;
+    }
+    
+    
+    .carousel-wrapper>a>img {
+        height: 150px;
+    }
+
+    .course-content h2{
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .carousel-link{
+        padding: 5px;
+        font-size: 12px;
+    }
 }

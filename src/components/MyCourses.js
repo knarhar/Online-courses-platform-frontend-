@@ -65,7 +65,7 @@ const MyCourses = () => {
                     </div>
                 );
             }) :
-                <div className='my-courses'>
+                <div className='my-no-courses'>
                     <img src={sad} />
                     <div>
                         <p>There are no courses</p>
