@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { useAuth } from "../../assets/AuthContext";
 import "../../statics/css/modulepage.css";
 import markModuleCompleted from "../../assets/markModuleCompleted";
+import ReactMarkdown from 'react-markdown';
+
 
 const ModulePage = () => {
   const { id, topicId, moduleId } = useParams();
@@ -22,15 +24,13 @@ const ModulePage = () => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
             },
-          }
-        );
+          });
 
         if (!moduleResponse.ok) {
           throw new Error(
             `Failed to fetch module data: ${moduleResponse.statusText}`
           );
         }
-
         const moduleData = await moduleResponse.json();
         setModuleData(moduleData);
       } catch (error) {
@@ -61,9 +61,7 @@ const ModulePage = () => {
         setScore(score + 1);
       }
       const allQuestionsAnswered =
-        Object.keys(updatedSelectedAnswers).length ===
-        moduleData.question.length;
-
+        Object.keys(updatedSelectedAnswers).length === moduleData.question.length;
       setAllQuestionsAnswered(allQuestionsAnswered);
     }
   };
@@ -73,48 +71,23 @@ const ModulePage = () => {
       {moduleData && (
         <div className="module-container">
           <Link to={`/profile/courses/${id}`} title='Back to course'><i className="fa-solid fa-arrow-left"></i></Link>
-
           <h2>Module: {moduleData.title}</h2>
           <p>Score: {score}</p>
-          {moduleData.question.map((question, index) => {
+          {moduleData.question && moduleData.question.map((question, index) => {
             const isAnswered = selectedAnswers[question.id] !== undefined;
-            const isCorrect = question.answer.find(
-              (answer) =>
-                answer.id === selectedAnswers[question.id] && answer.is_correct
-            );
-            const questionClass = isAnswered ? "read-only" : "";
-
             return (
-              <div
-                key={question.id}
-                className={`question-container ${questionClass}`}
-              >
-                <h4>
-                  Question {index + 1}: {question.question}
-                </h4>
-                {question.answer.map((answer) => {
+              <div key={question.id} className="question-container">
+                <h4>Question {index + 1}: {question.question}</h4>
+                {question.answer && question.answer.map((answer) => {
+                  const isCorrect = answer.is_correct;
                   const answerClass = isAnswered
-                    ? answer.id === selectedAnswers[question.id]
-                      ? isCorrect
-                        ? "answer correct"
-                        : "answer incorrect"
-                      : "answer"
+                    ? isCorrect ? "answer correct read-only" : "answer incorrect read-only"
                     : "answer";
-
                   return (
-                    <p
-                      className={answerClass}
-                      key={answer.id}
-                      onClick={() =>
-                        handleAnswerSelect(
-                          question.id,
-                          answer.id,
-                          answer.is_correct
-                        )
-                      }
-                    >
-                      {answer.answer}
-                    </p>
+                  <p className={answerClass} key={answer.id} onClick={() => handleAnswerSelect(question.id, answer.id, isCorrect)}>
+                    <ReactMarkdown >{answer.answer}</ReactMarkdown>
+                  
+                  </p>  
                   );
                 })}
               </div>
@@ -124,7 +97,7 @@ const ModulePage = () => {
             <div className="result-container">
               <div className="result">
                 <h3>Quiz Completed!</h3>
-                <p>Your score: {(score / moduleData.question.length) * 100}%</p>
+                <p>Your score: {((score / moduleData.question.length) * 100).toFixed()}%</p>
               </div>
             </div>
           )}

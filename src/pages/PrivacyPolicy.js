@@ -2,7 +2,7 @@ import React from 'react'
 import '../statics/css/privacyPolicy.css'
 const PrivacyPolicy = () => {
   return (
-    <div>
+    <div className='pp'>
       
     <div className="pp-main-container">
         <h1>Privacy Policy</h1>

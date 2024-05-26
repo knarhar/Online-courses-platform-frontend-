@@ -1,32 +1,30 @@
 import React, { useState } from 'react';
 import '../../statics/css/register.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../assets/AuthContext'
 import Cookies from 'js-cookie';
 
-function getCSRFToken() {
-  return Cookies.get('csrftoken');
-}
+
 const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const { register, login } = useAuth();
+  const { register, login, errorMessage, loginErrorMessage } = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [active, setActive] = useState(false)
   const [media, setMedia] = useState(false);
+  const [userType, setUserType] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await register(username, email, password);
-      if (response.ok) {
+      const response = await register(username, email, password, userType);
+      if (response && response.ok) {
         await login(username, password);
-
-        navigate('/courses');
+        navigate('/');
       } else {
-        console.error('Registration failed:', response.statusText);
+        console.error('Registration failed:', errorMessage);
       }
     } catch (error) {
       console.error('Error during registration:', error);
@@ -34,8 +32,8 @@ const RegisterPage = () => {
   };
 
 
+
   const handleLogin = async (e) => {
-    console.log('CSRF Token:', getCSRFToken());
     e.preventDefault();
 
     try {
@@ -45,10 +43,10 @@ const RegisterPage = () => {
       const accessToken = data.access_token;
 
       localStorage.setItem('access_token', accessToken);
-      navigate('/home')
-      console.log('Login successful!');
+      navigate('/')
     } catch (error) {
-      console.error('Error during login:', error);
+      let i = true;
+
     }
   };
 
@@ -60,8 +58,16 @@ const RegisterPage = () => {
     setMedia(!media)
   }
 
+  const handleUserTypeChange = (e) => {
+    setUserType(e.target.value);
+};
+
   return (
     <div className='main-reg-cont'>
+      <Link className='back-to-home' to='/'>
+        <span><i className="fa-solid fa-arrow-left"></i>
+        </span>
+      </Link>
       <div className={active ? "register-container active" : "register-container"} id='container'>
         <div className={media ? 'form-container sign-up media-active' : 'form-container sign-up'}>
 
@@ -71,14 +77,17 @@ const RegisterPage = () => {
             <input type="text" placeholder="Userame" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="email" placeholder="E-mail" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            {/* <select name="user type" id="user-type">
-              <option value="student">Student</option>
-              <option value="lector">Lecturer</option>
-            </select> */}
+
+            {errorMessage && <p className='errormessage'>{errorMessage}</p>}
+
+            <select value={userType} onChange={handleUserTypeChange} required>
+              <option value="false">Student</option>
+              <option value="true">Lecturer</option>
+            </select> 
 
             <div className='agr'>
-              <input type='radio' name='agr' id='agr' placeholder="I agree with Privacy Policy" />
-              <label htmlFor='agr'>I agree with Privacy Policy</label>
+              <input type="checkbox" name='agr' id='agr' placeholder="I agree with Privacy Policy" />
+              <label htmlFor='agr'>I agree with <Link to='/policy'>Privacy Policy</Link></label>
             </div>
             <a id="sign-in-media" onClick={handleMedia}>Already have an account? Sign in</a>
             <button type="submit">Sign up</button>
@@ -92,6 +101,8 @@ const RegisterPage = () => {
             <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             {/* <a href="/">Forgot your password?</a> */}
+            {loginErrorMessage && <p className='errormessage'>{loginErrorMessage}</p>}
+
             <a id="sign-up-media" onClick={handleMedia}>Don't have an account? Sign up.</a>
             <button type="submit" onClick={(e) => handleLogin(e)} >Log in</button>
           </form>

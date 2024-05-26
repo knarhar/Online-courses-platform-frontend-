@@ -1,13 +1,12 @@
 
 .main-reg-cont {
-  margin-top: 1%;
   background-color: #c9d6ff;
   background: linear-gradient(to right, #e2e2e2, #c9d6ff);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 95vh;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -266,9 +265,60 @@ form option {
   font-size: 13px;
 }
 
+.errormessage{
+  margin: 3px !important;
+  padding: 0;
+  color: red;
+  font-size: 12px !important;
+  text-align: center;
+  line-height: normal !important;
+}
+
+.back-to-home {
+  color: #512da8;
+  font-size: 35px;
+  position: absolute;
+  display: inline-block;
+  top: 64px;
+  left: 50px;
+  padding: 5px 12px;
+  border-radius: 15px;
+  transition: .4s ease;
+  
+}
+.back-to-home span {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: 0.5s;
+  font-size: 22px;
+}
+.back-to-home span:after {
+  content: ' Back to home page';
+  white-space: nowrap;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+ }
+ 
+
+.back-to-home:hover span {
+  padding-right: 15px;
+ }
+
+.back-to-home:hover span:after {
+  opacity: 1;
+  left: 34px;
+ }
+
 @media screen and (max-width: 780px) {
   .register-container {
     width: 100vw;
+    height: 99vh;
     
   }
 
@@ -315,5 +365,15 @@ form option {
   .form-container>form {
     border: 5px #512da8 solid;
     border-radius: 30px;
+    height: 98vh;
   }
+
+.back-to-home {
+  top: 35px;
+  left: 25px;
+  z-index: 100;
+  font-size: 25px;
+
+}
+
 }

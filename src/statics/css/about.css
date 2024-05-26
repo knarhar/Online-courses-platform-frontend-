@@ -1,25 +1,30 @@
-.about-us-main-container{
+.about-us-main-container {
     user-select: none;
 }
-.about-us-text{
+
+.about-us-text {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:150px;
+    gap: 150px;
     top: 150px;
     padding: 50px;
 }
+
 .about-us-text h1 {
     font-size: 120px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Work Sans', sans-serif;
+
     line-height: 100px;
 }
+
 .slogan-container {
     display: inline-block;
-    padding: 15px ;
+    padding: 15px;
 }
-.slogan{
+
+.slogan {
     font-family: monospace;
     font-size: 30px;
     text-align: center;
@@ -27,22 +32,23 @@
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    animation: 
+    animation:
         typing 2s steps(29),
         cursor .4s step-end infinite alternate;
 }
 
 @keyframes cursor {
-    50%{
+    50% {
         border-color: transparent;
     }
-    
+
 }
+
 @keyframes typing {
-    from{
+    from {
         width: 0;
     }
-    
+
 }
 
 .about-us2 {
@@ -69,18 +75,21 @@
     padding: 50px 0;
     background-color: #76699A;
     color: white;
-    border-bottom: 3px solid rgb(44, 1, 90) ;
+    border-bottom: 3px solid rgb(44, 1, 90);
 }
-.foo-logo-cont{
+
+.foo-logo-cont {
     display: flex;
     flex-direction: column;
     gap: 50px;
 }
+
 .foo-logo-cont p {
     font-family: 'Garamond';
     font-style: italic;
 }
-.foo-logo{
+
+.foo-logo {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -89,34 +98,38 @@
 .foo-logo img {
     width: 60px;
 }
-.contacts{
+
+.contacts {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-.media{
+
+.media {
     display: flex;
     align-items: center;
     gap: 15px;
-    
+
 }
 
 .media p {
     margin: 0;
 }
 
-@media only screen and (max-width:900px){
-    .about-us{
+@media only screen and (max-width:900px) {
+    .about-us {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: 25px;
     }
+
     .about-us img {
         width: 100%;
     }
-    .about-us-text{
+
+    .about-us-text {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -127,24 +140,29 @@
         padding: 0;
         width: 100%;
     }
-    .about-us-text h1{
+
+    .about-us-text h1 {
         font-size: 30px;
         line-height: normal;
     }
+
     .main-about-us-text-p {
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       justify-content: center;
-        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
     }
-    .main-about-us-text-p .text{
+
+    .main-about-us-text-p .text {
         padding: 0 15px;
     }
-    .slogan-container{
+
+    .slogan-container {
         padding: 0;
     }
-    .slogan{
+
+    .slogan {
         font-size: 22px;
         line-height: normal;
         text-align: center;
@@ -155,7 +173,7 @@
     .about-us2 {
         display: flex;
         flex-direction: column-reverse;
-        padding: 15px ;
+        padding: 15px;
         margin-top: 50px;
         gap: 0;
     }
@@ -163,16 +181,19 @@
     .about-us2 img {
         width: 250px;
     }
+
     .about-us2 p {
         font-size: 16px;
         line-height: normal;
     }
-    .about-us-contact{
+
+    .about-us-contact {
         display: flex;
         flex-direction: column-reverse;
         gap: 80px;
     }
-    .foo-logo-cont{
+
+    .foo-logo-cont {
         display: flex;
         flex-direction: column;
         gap: 0;

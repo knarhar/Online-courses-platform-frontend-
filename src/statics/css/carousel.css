@@ -69,6 +69,7 @@
 .course-content h2 {
     font-size: 55px;
     margin-bottom: 15px;
+    max-width: 350px;
 }
 
 .course-content:hover {

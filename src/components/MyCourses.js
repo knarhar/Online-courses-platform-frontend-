@@ -5,6 +5,7 @@ import sad from '../statics/images/sad-bg.jpg';
 
 const MyCourses = () => {
     const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchMyCourses = async () => {
@@ -16,8 +17,10 @@ const MyCourses = () => {
                 });
                 const data = await response.json();
                 setCourses(data);
+                setLoading(false); 
             } catch (error) {
                 console.error('Error fetching my courses:', error);
+                setLoading(false); 
             }
         };
 
@@ -33,7 +36,6 @@ const MyCourses = () => {
                 },
             });
             if (response.ok) {
-                // Успешно удалено, обновляем список курсов
                 setCourses(courses.filter(course => course.course.id !== courseId));
             } else {
                 console.error('Failed to unenroll:', response.statusText);
@@ -42,6 +44,9 @@ const MyCourses = () => {
             console.error('Error unenrolling:', error);
         }
     };
+
+    if (loading) {
+        return <div className='loader'></div>; }
 
     return (
         <div className='my-courses-container'>
@@ -52,7 +57,7 @@ const MyCourses = () => {
                 return (
                     <div key={course.id} className='my-courses'>
                         <img src={course.pic} alt={`Course ${course.title}`} />
-                        <div>
+                        <div className='my-courses-texts'>
                             <h2>{course.title}</h2>
                             <p>Category: {course.category_name}</p>
                             <p>{course.description}</p>

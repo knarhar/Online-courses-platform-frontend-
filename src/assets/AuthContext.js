@@ -8,7 +8,8 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
-
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const getCSRFToken = () => {
     return Cookies.get('csrftoken');
   };
@@ -21,47 +22,56 @@ export const AuthProvider = ({ children }) => {
   }, [isAuthenticated]);
 
   const fetchUserData = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/profile/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      });
+   if (isAuthenticated){ try {
+    const response = await fetch('http://127.0.0.1:8000/api/profile/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+      },
+    });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log('User data:', data.user);
-        setUserData(data.user);
-      } else {
-        console.error('Failed to fetch user data:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error during fetch:', error);
+    if (response.ok) {
+      const data = await response.json();
+      console.log('User data:', data.user);
+      setUserData(data.user);
+    } else {
+      console.error('Failed to fetch user data:', response.statusText);
     }
+  } catch (error) {
+    console.error('Error during fetch:', error);
+  }}
   };
 
-  const register = async (username, email, password) => {
+  const register = async (username, email, password, userType) => {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRFToken': getCSRFToken(),
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ username, email, password, userType }),
       });
-
+      const data = await response.json();
       if (response.ok) {
-        await login(username, password);
+        login(username, password);
       } else {
-        console.error('Registration failed:', response.statusText);
+        console.error('Registration failed:', data.error);
+        if (data.error) {
+          setErrorMessage(data.error); 
+        } else {  
+          setErrorMessage('Registration failed'); 
+        }
       }
+      return response;
     } catch (error) {
       console.error('Error during registration:', error);
+      setErrorMessage('Error during registration'); 
+      throw error;
     }
   };
+  
+  
 
   const login = async (username, password) => {
     try {
@@ -69,25 +79,24 @@ export const AuthProvider = ({ children }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRFToken': getCSRFToken(),
         },
         body: JSON.stringify({ username, password }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
         const accessToken = data.access_token;
         localStorage.setItem('access_token', accessToken);
         setIsAuthenticated(true);
-        setUserData(data.user);
+        navigate('/');
         fetchUserData();
-        navigate('/home');
-        console.log('Login successful!');
+        setUserData(data.user);
       } else {
-        console.error('Login failed:', response.statusText);
+        setLoginErrorMessage(data.error)
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      let i = true;
     }
   };
 
@@ -95,12 +104,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('access_token');
     setIsAuthenticated(false);
     setUserData(null);
-    // Перенаправляем пользователя на страницу выхода или выполните другие действия
     navigate('/home');
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userData, fetchUserData,register, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, userData, fetchUserData, register, errorMessage, loginErrorMessage, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

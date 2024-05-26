@@ -13,9 +13,7 @@ const AboutUsPage = () => {
             <h1>About CourseCore</h1>
             <div className='main-about-us-text-p'>
               <div className='slogan-container' >
-
                 <p className='slogan'>Fueling the world's ambitions</p>
-
               </div>
               <p className='text'>CourseCore is a dynamic and inclusive online learning platform offering a diverse array of courses
                 curated from renowned educators across the globe. Born out of an innovative experiment by the National
@@ -45,9 +43,7 @@ const AboutUsPage = () => {
             <div className='foo-logo'>
               <img src={logo} />
               <h1>CourseCore</h1>
-
             </div>
-
             <p>© CourseCore, Inc. 2024. We love our students!</p>
           </div>
           <div className='contacts'>
@@ -62,10 +58,9 @@ const AboutUsPage = () => {
             </div>
             <div className='media'>
               <i class="fa-solid fa-envelope"></i>
-              <p>coursecore@gmail.com</p>
+              <p>coursecore.support@gmail.com</p>
             </div>
           </div>
-
         </div>
       </div>
     </div>

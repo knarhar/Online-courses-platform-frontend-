@@ -36,13 +36,15 @@ const ArticleDetailPage = () => {
     };
 
     return (
-        <div className='article-cont'>
+        <div className='art-cont'>
+            <div className='article-cont'>
             <h1>{article.title}</h1>
             <div style={preStyle}>
                 <ReactMarkdown children={article.content} />
-
+                
             </div>
             <Link to='/articles' className='back-to-articles'><i className="fa-solid fa-arrow-left"></i> Return to articles list</Link>
+        </div>
         </div>
     )
 }

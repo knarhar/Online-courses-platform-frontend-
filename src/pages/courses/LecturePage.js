@@ -91,18 +91,17 @@ const LecturePage = () => {
 
   return (
     <div className='lecture-container'>
-      <Link to={`/profile/courses/${id}`} title='Back to course'><i className="fa-solid fa-arrow-left"></i></Link>
+      <Link to={`/profile/courses/${id}`} title='Back to course' className='back'><i className="fa-solid fa-arrow-left"></i></Link>
       {lectureData && (
-        <div>
+        <div className='lecture'>
 
           <h2>{lectureData.title}</h2>
 
-          {/* <div style={preStyle}>{lectureData.content}</div> */}
           <div style={preStyle} className='lecture-content'>
-            {/* Рендеринг Markdown с помощью ReactMarkdown */}
             <ReactMarkdown children={lectureData.content} />
           </div>
-          <div>
+          {lectureData.link ? (
+            <div>
             <iframe
               width="100%"
               height="500px"
@@ -113,6 +112,9 @@ const LecturePage = () => {
               allowFullScreen
             ></iframe>
           </div>
+          ): (
+            <div></div>
+          )}
         </div>
       )}
 
@@ -122,15 +124,15 @@ const LecturePage = () => {
       <div className='lect-nav'>
         {/* Link to previous lecture */}
         {getPreviousLectureId() && (
-          <Link to={`/profile/courses/${id}/topics/${topicId}/lectures/${getPreviousLectureId()}`}>
-            Previous lecture
+          <Link  to={`/profile/courses/${id}/topics/${topicId}/lectures/${getPreviousLectureId()}`} className='previous'>
+            <i className="fa-solid fa-backward"></i> Previous lecture
           </Link>
         )}
 
         {/* Link to next lecture */}
         {getNextLectureId() && (
-          <Link to={`/profile/courses/${id}/topics/${topicId}/lectures/${getNextLectureId()}`}>
-            Next lecture
+          <Link to={`/profile/courses/${id}/topics/${topicId}/lectures/${getNextLectureId()}`} className='next'>
+            Next lecture <i className="fa-solid fa-forward"></i>
           </Link>
         )}
       </div>

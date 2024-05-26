@@ -72,7 +72,7 @@ const CourseProgress = ({ courseId }) => {
           </>
         ) : <>
           <div className='progress-bar-container'>
-            <div className='progress-bar' style={{ width: `${lectureProgress}%` }} > {lectureProgress}%</div>
+            <div className='progress-bar' style={{ width: `${lectureProgress}%` }} > {lectureProgress.toFixed(0)}%</div>
           </div>
         </>
         }
@@ -91,16 +91,19 @@ const CourseProgress = ({ courseId }) => {
 
         ) :
           <div className='progress-bar-container'>
-            <div className='progress-bar' style={{ width: `${moduleProgress}%` }}>{moduleProgress}%</div>
+            <div className='progress-bar' style={{ width: `${moduleProgress}%` }}>{moduleProgress.toFixed(0)}%</div>
           </div>
         }
       </div>
 
-      
 
-      <div className='total'>
-        {totalScore !== null && <p>Average course score: {totalScore.toFixed(0)}%</p>}
-      </div>
+      {moduleProgress === 100 && lectureProgress === 100 ? (
+        <div className='total'>
+          {totalScore !== null && <p>Average course score: {totalScore.toFixed(0)}%</p>}
+        </div>
+      ) : (
+        <div></div>
+      )}
 
       {error && <p className="text-danger">{error}</p>}
     </div>

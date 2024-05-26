@@ -1,10 +1,19 @@
-.module-container{
+.module-container {
     margin: 100px 0 80px !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.answer.correct {
+    background-color: rgb(82, 212, 82)
+}
+
+.answer.incorrect {
+    background-color: rgb(255, 209, 209);
+}
+
 
 .module-container i {
     font-size: 19px;
@@ -26,39 +35,47 @@
 .module-container h2 {
     text-align: center;
 }
+
 .question-container {
     width: 80%;
     margin: auto;
-    
+
 
 }
 
-.question-container h4{
+.question-container h4 {
     border-bottom: 1px solid #656565;
 }
 
 .answer {
-    padding: 5px;
+    padding: 12px;
     border: 1px solid #654aa6;
     border-radius: 5px;
     cursor: pointer;
     transition: .5s ease;
+    margin: 7px 0;
 }
 
-.answer:hover{
+.answer:hover {
     transform: scale(1.001) translate(-1px);
 }
-.correct {
-    background-color: rgb(33, 217, 73);
-}
-.incorrect {
-    background-color: #ff9e9e;
-}
+
 .read-only {
-    pointer-events: none; /* Запретить клики */
-    opacity: 0.5; /* Уменьшить прозрачность */
-  }
-.result-container{
+    pointer-events: none;
+    /* Запретить клики */
+    opacity: 0.5;
+    /* Уменьшить прозрачность */
+}
+
+.answer  code {
+    color: black;
+}
+
+.answer>p{
+    margin: 0;
+}
+
+.result-container {
     text-align: center;
     border: 2px dashed #7b5aff;
     padding: 0 50px;
@@ -72,5 +89,5 @@
     .module-container i {
         left: 10px;
     }
-    
+
 }

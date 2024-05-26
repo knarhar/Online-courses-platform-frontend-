@@ -53,7 +53,8 @@ const EnrolledCoursePage = () => {
             <p>{courseData.description}</p>
           </div>
           <div className="enr-prog">
-            <h4>Course Program</h4>
+            <h3>Course Program</h3>
+            <p>Check all lectures and modules to complete your progress and get a course score.</p>
             {courseData.topics.map((topic) => (
               <div key={topic.id}>
                 <div className={topicOpen[topic.id] ? 'title-bar active' : 'title-bar'} onClick={() => toggleTopic(topic.id)}>

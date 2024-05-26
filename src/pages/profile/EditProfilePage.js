@@ -13,6 +13,8 @@ const EditProfilePage = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [pic, setPic] = useState(null);
+  const [bio, setBio] = useState('');
+
 
 
   const handleSubmit = async (e) => {
@@ -32,8 +34,11 @@ const EditProfilePage = () => {
     if (pic) {
       formData.append("pic", pic);
     }
+    if (bio){
+      formData.append("bio", bio);
+    }
 
-    if (!username && !email && !pic && !bank) {
+    if (!username && !email && !pic && !bank && !bio) {
       navigate('/profile');
       return;
     }
@@ -55,6 +60,7 @@ const EditProfilePage = () => {
         setEmail("");
         setBank("");
         setPic(null);
+        setBio("");
         await fetchUserData();
         navigate('/profile');
 
@@ -78,6 +84,10 @@ const EditProfilePage = () => {
     setUsername(e.target.value);
   };
 
+  const changeBio = (e) => {
+    setBio(e.target.value);
+  };
+
   const changeBank = (e) => {
     setBank(e.target.value);
   };
@@ -92,19 +102,19 @@ const EditProfilePage = () => {
 
   return (
     <div className="update-prof-cont">
-      <div className="main-upd-profile">
-        <Link to='/profile' className="main-upd-back"><i className="fa-solid fa-arrow-left"></i> back to the profile</Link>
-        <h1>Update Profile</h1>
-      </div>
+
       {loading && <p>Loading profile data...</p>}
       {error && <p>{error}</p>}
-      {/* {success && <p>Profile updated successfully!</p>} */}
       {!loading && !error && !success && (
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="change-profile">
+            <div className="main-upd-profile">
+              <Link to='/profile' className="main-upd-back"><i className="fa-solid fa-arrow-left"></i> Back to the profile</Link>
+              <h1>Change Profile</h1>
+            </div>
             <label htmlFor="pic" className="change-pic-label">
               {userData && userData.pic && <img src={pic ? URL.createObjectURL(pic) : userData.pic} alt='profile pic' className="upd-prof-pic" />}
-              
+
               <i className="fa-solid fa-camera"></i>
             </label>
             <input type="file" id='pic' onChange={changePic} className="change-pic" />
@@ -112,6 +122,10 @@ const EditProfilePage = () => {
               <div className="edit-row">
                 <label htmlFor="username">Set new username:</label>
                 <input type="text" id="username" name="username" value={username} onChange={changeUsername} />
+              </div>
+              <div className="edit-row">
+                <label htmlFor="bio">Set bio:</label>
+                <input type="text" id="bio" name="bio" value={bio} onChange={changeBio} />
               </div>
               <div className="edit-row">
                 <label htmlFor="email">Set new Email:</label>
@@ -122,7 +136,7 @@ const EditProfilePage = () => {
                 <input type="text" id="bank" name="bank" value={bank} onChange={changeBank} />
               </div>
             </div>
-            <button type="submit" >Update Profile</button>
+            <button type="submit" >Confirm changes</button>
           </div>
         </form>
       )}

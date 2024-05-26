@@ -1,20 +1,25 @@
-.main-container{
+.main-container {
     height: 650px;
     margin-top: 35px;
     padding: 100px 50px;
     background-image: url('../images/main-bg.jpg');
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
     color: white;
 }
+
 .main-container h1 {
     font-size: 90px;
+    font-family: 'Work Sans', sans-serif !important;
+    
 }
+
 .main-container p {
     font-size: 25px;
     font-style: italic;
 }
-.main{
+
+.main {
     padding: 25px;
     background-color: rgba(12, 12, 12, 0.736);
     display: flex;
@@ -22,17 +27,19 @@
     align-items: center;
     gap: 5%;
     z-index: -500;
-    
+
 }
+
 .main-text {
     width: 60%;
 }
+
 .main-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
 }
 
 .main-action {
@@ -49,7 +56,7 @@
 
 }
 
-.main-action:before{
+.main-action:before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
     position: absolute;
@@ -59,24 +66,33 @@
     width: calc(100% + 4px);
     height: calc(100% + 4px);
     animation: glowing 15s linear infinite;
-    opacity: .5; 
+    opacity: .5;
     transition: opacity .3s ease-in-out;
     z-index: -1;
 }
+
 .main-action:hover {
     background-color: #002bff;
 }
 
 
 @keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
 }
 
 .avil {
     font-size: 35px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: 200;
     padding: 0 25px;
 }
@@ -87,18 +103,19 @@
 
 .learn {
     display: flex;
-    padding: 25px ;
+    padding: 25px;
     align-items: flex-end;
 }
 
 .learn p {
-    padding: 20px ;
+    padding: 20px;
     background-color: #69637d;
     color: white;
     font-size: 18px;
     width: 750px;
-    border-radius: 15px;
+    border: 1px solid #000000;
     box-shadow: -8px 20px 20px 2px #9b9b9b;
+    line-height: 160%;
     margin: 0 25px;
 }
 
@@ -114,23 +131,74 @@
 .learn2 img {
     width: 500px;
     box-shadow: 8px -12px 0px 1px #673579;
-    
+
 }
 
-.learn2 p{
-    padding: 20px ;
+.learn2 p {
+    padding: 20px;
     background-color: #F5F4F9;
     font-size: 18px;
-    border-radius: 15px;
+    border: 1px solid #673579;
     box-shadow: -8px 20px 20px 2px #d7d2e6;
     width: 600px;
+    line-height: 140%;
+
+}
+
+.newsletter-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    padding: 80px;
+    background-color:#797cb9;
+}
+
+.newsletter-container .contacts {
+    padding: 15px 85px 25px ;
+    background-image: url(../images/154502.svg);
+    background-size: cover ;
+    /* box-shadow: 50px 0px 20px 2px #696c91; */
+    letter-spacing: 1.5px;
+}
+
+.newsletter{
     
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    background-color: #989cd0;
+    text-align: center;
+    border-radius: 12px;
+    width: 450px;
+}
+
+.newsletter form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.newsletter input {
+    width: 100%;
+    padding: 9px 4px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+
+}
+
+.newsletter input:focus{
+    border: none;
 }
 
 @media only screen and (max-width: 1200px) {
     .main-container {
         padding: 100px 15px;
     }
+
     .main {
         display: flex;
         flex-direction: column;
@@ -139,6 +207,7 @@
     .main-text h1 {
         font-size: 30px;
     }
+
     .main-text p {
         font-size: 16px;
     }
@@ -150,32 +219,37 @@
     .main-action {
         padding: 5px 9px;
     }
+
     .avil {
         font-size: 25px;
         padding: 0;
         text-align: center;
     }
-    .learn{
+
+    .learn {
         display: flex;
         flex-direction: column;
         align-items: end;
         gap: 25px;
     }
+
     .learn img {
         width: 350px;
     }
+
     .learn p {
         font-size: 15px;
         width: 70%;
         margin: 0;
     }
 
-    .learn2{
+    .learn2 {
         display: flex;
         flex-direction: column-reverse;
         gap: 25px;
         margin: 10px 0 0 0;
     }
+
     .learn2 img {
         width: 300px;
 
@@ -186,5 +260,22 @@
         width: 70%;
         margin: 0;
     }
-    
+
+    .newsletter-container{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .newsletter-container .contacts {
+        width: 100%;
+        padding: 20px 40px;
+
+    }
+
+    .newsletter {
+        width: 100%;
+    }
+
 }

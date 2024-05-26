@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../statics/css/articles.css';
 import sad from '../../statics/images/sad-bg2.jpg'
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../assets/AuthContext';
 function CategoryFilter({ onCategoryChange, selectedCategory }) {
   const categories = [
     { id: null, name: 'All' },
@@ -18,7 +19,7 @@ function CategoryFilter({ onCategoryChange, selectedCategory }) {
 
   return (
     <div className='categories'>
-      <h2><i class="fa-solid fa-filter"></i> Filter by Category:</h2>
+      <h2><i className="fa-solid fa-filter"></i> Filter by Category:</h2>
       <div className='categories-btn'>
         {categories.map(category => (
           <button
@@ -48,10 +49,14 @@ const ArticlesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { isAuthenticated, fetchUserData, userData } = useAuth();
 
   useEffect(() => {
     getArticles();
-  }, [selectedCategory]);
+    if (isAuthenticated && !userData) {
+      fetchUserData();
+    }
+  }, [selectedCategory, isAuthenticated, userData, fetchUserData]);
 
   const getArticles = async () => {
     setLoading(true);
@@ -74,8 +79,33 @@ const ArticlesPage = () => {
     }
   };
 
+  const handleDeleteArticle = async (id) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/article/add/`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          article_id: id,
+        }),
+      });
+      if (response.ok) {
+        console.log('Article deleted successfully');
+        getArticles();
+      } else {
+        console.error('Failed to delete article:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting article:', error);
+    }
+  };
+
+  
+
   return (
-    <div>
+    <div className='articles'>
       <div className='main-articles'>
         <h1>Explore our Articles</h1>
         <p>
@@ -97,21 +127,33 @@ const ArticlesPage = () => {
         {articles.length > 0 ? (
           articles.map(article => (
             <div key={article.id} className='article-card'>
-              <h2>{article.title}</h2>
-              <p>{article.description}</p>
+              <div className='article-card-text'>
+                <h2>{article.title}</h2>
+                <p>{article.description}</p>
+                <p>Date posted: {article.pub_date.slice(0, 10)}</p>
                 <div className='art-category-flag'><div className='triangle'></div>{article.category_name[0]}</div>
-              <Link to={`/articles/${article.id}`} className='link-to-article'><i class="fa-solid fa-tag"></i> See more</Link>
+                <Link to={`/articles/${article.id}`} className='link-to-article'><i className="fa-solid fa-tag"></i> See more</Link>
+                {userData && userData.is_staff && (
+                  <button className='delete-article' onClick={() => handleDeleteArticle(article.id)}><i className="fa-solid fa-trash"></i></button>
+                )}
+              </div>
             </div>
           ))
         ) : (
           <div className='no-articles'>
-            <img src={sad}/>
-          <p>No articles found for the selected category.</p>
+            <img src={sad} alt="Sad face"/>
+            <p>No articles found for the selected category.</p>
           </div>
         )}
       </div>
+      {userData && userData.is_staff ? (
+        <Link to='/add-article'><div className='add-article'> <i className="fa-solid fa-pen"></i> Add article</div></Link>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
 
 export default ArticlesPage;
+

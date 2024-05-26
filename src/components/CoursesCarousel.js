@@ -25,7 +25,7 @@ const CoursesCarousel = () => {
         <div className='carousel-cont'>
             <div className='courses-carousel'>
                 {courses.map((course) => (
-                    <div className='carousel-item'>
+                    <div className='carousel-item' key={`${course.id}`}>
 
                         <div className='carousel-wrapper'>
 
@@ -34,7 +34,7 @@ const CoursesCarousel = () => {
                             </Link>
 
                             <div className='course-content'>
-                                <h2>{course.title}</h2>
+                            <h2>{course.title.length > 10 ? `${course.title.slice(0, 10)}...` : course.title}</h2>
                                 <Link to={`/courses/${course.id}`} className='carousel-link' key={course.id}>
                                     Read more
                                 </Link>
@@ -48,16 +48,16 @@ const CoursesCarousel = () => {
             </div>
             <div className='courses-carousel'>
                 {courses.map((course) => (
-                    <div className='carousel-item'>
+                    <div className='carousel-item' key={`${course.id}115`}>
 
                         <div className='carousel-wrapper'>
 
-                            <Link to={`/courses/${course.id}`} key={course.id}>
+                            <Link to={`/courses/${course.id}`} key={`${course.id}`}>
                                 <img src={course.pic} alt={course.title} />
                             </Link>
 
                             <div className='course-content'>
-                                <h2>{course.title}</h2>
+                            <h2>{course.title.length > 10 ? `${course.title.slice(0, 10)}...` : course.title}</h2>
                                 <Link to={`/courses/${course.id}`} className='carousel-link' key={course.id}>
                                     Read more
                                 </Link>

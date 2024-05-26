@@ -23,6 +23,12 @@ const CourseDetailPage = () => {
 
 
   const handleEnroll = async () => {
+
+    if ((bankAccount.length !== 16) && course.is_paid) {
+      alert('Please enter a valid 16-digit bank account number!');
+      return;
+    }
+
     if (bankAccount !== '0000000000000000' && course.is_paid) {
 
       try {
@@ -80,7 +86,7 @@ const CourseDetailPage = () => {
       }
     }
     else if (course.is_paid && bankAccount === '0000000000000000') {
-      alert('Please enter your bank account!')
+      alert('Please enter valid bank account!')
     }
   };
 
@@ -112,8 +118,8 @@ const CourseDetailPage = () => {
       setBankAccount(userData.bank_account);
     }
   }, [userData]);
-  
-  
+
+
   useEffect(() => {
     if (showPaymentForm) {
       document.body.classList.add('payment-form-open');
@@ -132,7 +138,7 @@ const CourseDetailPage = () => {
     setShowPaymentForm(!showPaymentForm);
   };
 
-  
+
 
   const toggleDropdown = (index) => {
     setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -141,12 +147,12 @@ const CourseDetailPage = () => {
   return (
     <div>
       <div className='course-container'>
-      <div className='back-to-courses-container'><div className='triangle'></div><Link to='/courses' className='back-to-courses'><i className="fa-solid fa-arrow-left"></i> Back to courses</Link></div>
-        <img src={course.pic} alt={`Course ${course.title}`} />
+        <div className='back-to-courses-container'><div className='triangle'></div><Link to='/courses' className='back-to-courses'><i className="fa-solid fa-arrow-left"></i> Back to courses</Link></div>
         <div className='course-info'>
-          <h1>{course.title}</h1>
+        <img src={course.pic} alt={`Course ${course.title}`} />
+          <h1>Course: {course.title}</h1>
           <p>Category: {course.category_name}</p>
-          <p>{course.is_paid ? <>{course.amount} {course.currency}</> : 'Free'}</p>
+          <p>Amount: {course.is_paid ? <>{course.amount} {course.currency}</> : 'Free'}</p>
           <p>{course.description}</p>
           {isAuthenticated ? (
             enrollmentStatus ? (
@@ -166,7 +172,7 @@ const CourseDetailPage = () => {
                         <div className="payment-form">
                           <div className='payment-row'>
                             <label htmlFor="bk">Bank account:</label>
-                            <input type="text" name="bk" placeholder="Enter bank account" value={bankAccount} onChange={(e) => setBankAccount(e.target.value)} />
+                            <input type="text" name="bk" placeholder="Enter bank account" value={bankAccount} onChange={(e) => setBankAccount(e.target.value)} required={true} pattern="[0-9]{16}" />
                           </div>
                           <div className='payment-row'>
                             <label htmlFor="pr">Course Price:</label>
@@ -191,14 +197,14 @@ const CourseDetailPage = () => {
                 )}
               </>
             )) : (
-            <p>Please log in to enroll in the course.</p>
+            <Link to='/register'><p className='please'>Please Log in to enroll in the course.</p></Link>
           )}
         </div>
         <div className='course-program'>
           <h2>Course Program</h2>
           <div className='dropdown-box'>
             <div className='drowBox'>
-              {course.topics.map((topic, index) => (
+              {course.topics && course.topics.map((topic, index) => (
                 <div key={topic.id}>
                   <div className={`opener`} onClick={() => toggleDropdown(index)}>
                     <h1>{topic.title}</h1>
