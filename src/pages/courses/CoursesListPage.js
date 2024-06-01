@@ -50,7 +50,7 @@ function CoursesListPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { userData} = useAuth()
+  const { userData } = useAuth()
 
   useEffect(() => {
     getCourses();
@@ -76,18 +76,41 @@ function CoursesListPage() {
     }
   };
 
+  const handleDeleteCourse = async (id) =>{
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/course/delete/`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          course_id: id,
+        }),
+      });
+      if (response.ok) {
+        console.log('course deleted successfully');
+        getCourses();
+      } else {
+        console.error('Failed to delete course:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting course:', error);
+    }
+  }
+
   return (
     <div>
       <div className='main-courses-cont'>
         <div className='main-courses'>
           <h1> Discover our Courses </h1>
           <p>Delve into a captivating expedition of intellectual enrichment and expertise refinement as you immerse yourself
-             in our expansive array of educational offerings. Regardless of whether you find yourself at the inception of your
-              learning voyage or amidst the zenith of your career, our meticulously crafted assortment of courses is tailored to
-               accommodate individuals of every proficiency level and inclination. Traverse the boundless realms of knowledge acquisition
-                alongside us, embarking upon a transformative odyssey that propels you closer toward the realization of your aspirations, 
-                both personally and professionally. Venture forth and discover the myriad opportunities awaiting your exploration and cultivation within our
-                 esteemed educational community.</p>
+            in our expansive array of educational offerings. Regardless of whether you find yourself at the inception of your
+            learning voyage or amidst the zenith of your career, our meticulously crafted assortment of courses is tailored to
+            accommodate individuals of every proficiency level and inclination. Traverse the boundless realms of knowledge acquisition
+            alongside us, embarking upon a transformative odyssey that propels you closer toward the realization of your aspirations,
+            both personally and professionally. Venture forth and discover the myriad opportunities awaiting your exploration and cultivation within our
+            esteemed educational community.</p>
         </div>
       </div>
       <CategoryFilter onCategoryChange={categoryId => setSelectedCategory(categoryId)} selectedCategory={selectedCategory} />
@@ -106,6 +129,9 @@ function CoursesListPage() {
                 {course.is_paid ? <p className='paid-price'><div className='triangle'></div>Paid</p> : <p className='free-price'><div className='triangle'></div>Free</p>}
                 <div className='category-flag'><div className='triangle'></div>{course.category_name[0]}</div>
                 <Link to={`/courses/${course.id}`} className='course-card-action'>Read more...</Link>
+                {userData && userData.is_staff && (
+                  <button className='delete-article' onClick={() => handleDeleteCourse(course.id)}><i className="fa-solid fa-trash"></i></button>
+                )} 
               </div>
             </div>
           ))

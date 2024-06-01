@@ -80,10 +80,10 @@ const RegisterPage = () => {
 
             {errorMessage && <p className='errormessage'>{errorMessage}</p>}
 
-            <select value={userType} onChange={handleUserTypeChange} required>
+            {/* <select value={userType} onChange={handleUserTypeChange} required>
               <option value="false">Student</option>
               <option value="true">Lecturer</option>
-            </select> 
+            </select>  */}
 
             <div className='agr'>
               <input type="checkbox" name='agr' id='agr' placeholder="I agree with Privacy Policy" />
@@ -100,7 +100,6 @@ const RegisterPage = () => {
             <span>or use Your username for signing in</span>
             <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            {/* <a href="/">Forgot your password?</a> */}
             {loginErrorMessage && <p className='errormessage'>{loginErrorMessage}</p>}
 
             <a id="sign-up-media" onClick={handleMedia}>Don't have an account? Sign up.</a>
